@@ -1,0 +1,90 @@
+\hypertarget{Voting_8h}{\section{Voting.\-h File Reference}
+\label{Voting_8h}\index{Voting.\-h@{Voting.\-h}}
+}
+{\ttfamily \#include $<$deque$>$}\\*
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcandidate}{candidate}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{Voting_8h_ad79946fd82cde82dee8787630686b33d}{print\-\_\-state\-\_\-loosing} (vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-loosing)
+\item 
+void \hyperlink{Voting_8h_a4b4998d94433fb40fa8af618230fe638}{print\-\_\-state\-\_\-running} (vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-running)
+\item 
+void \hyperlink{Voting_8h_a8a7f560a8cd57d9bd6536a829943f9c0}{pre\-\_\-eval} (vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-running, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-loosing, vector$<$ int $>$ \&running\-\_\-ids)
+\item 
+bool \hyperlink{Voting_8h_a5a44358626507312e91ec4bd767d74c9}{check\-\_\-running} (ostream \&o, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-running, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-loosing, vector$<$ int $>$ \&running\-\_\-ids)
+\item 
+void \hyperlink{Voting_8h_ab39aeba1ab637843b2bdc2e21f16348d}{eval} (ostream \&o, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-running, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-loosing, vector$<$ int $>$ \&running\-\_\-ids)
+\item 
+void \hyperlink{Voting_8h_a0de3afd15c6b7ea2a12b3455b224f56e}{parse\-\_\-input} (istream \&input, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-running)
+\item 
+void \hyperlink{Voting_8h_a909712a187183d0648ea5902f8bd6a1f}{go} (istream \&input, ostream \&o)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{Voting_8h_a5a44358626507312e91ec4bd767d74c9}{\index{Voting.\-h@{Voting.\-h}!check\-\_\-running@{check\-\_\-running}}
+\index{check\-\_\-running@{check\-\_\-running}!Voting.h@{Voting.\-h}}
+\subsubsection[{check\-\_\-running}]{\setlength{\rightskip}{0pt plus 5cm}bool check\-\_\-running (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{o, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-running, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-loosers, }
+\item[{vector$<$ int $>$ \&}]{running\-\_\-ids}
+\end{DoxyParamCaption}
+)}}\label{Voting_8h_a5a44358626507312e91ec4bd767d74c9}
+check\-\_\-running is where we verify we have a winner or someone tied for the winning position. It outputs to the ostream, o, and returns a boolean to signify that we now need to exit the program. \hypertarget{Voting_8h_ab39aeba1ab637843b2bdc2e21f16348d}{\index{Voting.\-h@{Voting.\-h}!eval@{eval}}
+\index{eval@{eval}!Voting.h@{Voting.\-h}}
+\subsubsection[{eval}]{\setlength{\rightskip}{0pt plus 5cm}void eval (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{o, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-running, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-loosers, }
+\item[{vector$<$ int $>$ \&}]{running\-\_\-ids}
+\end{DoxyParamCaption}
+)}}\label{Voting_8h_ab39aeba1ab637843b2bdc2e21f16348d}
+eval redistributes the votes to the respective candidates, and calls upon check\-\_\-running to see if the redistribution resulted in a winner. Else, candidates\-\_\-running creates another looser pool for which \hyperlink{Voting_8c_09_09_a96020138d7a719504acef5a7c227c337}{eval()} must handle once more, until a winner (or tie) is reached Notes\-: evaluate from the second column onward check if we found a winner at the beginning only consider those in the losers pool \hypertarget{Voting_8h_a909712a187183d0648ea5902f8bd6a1f}{\index{Voting.\-h@{Voting.\-h}!go@{go}}
+\index{go@{go}!Voting.h@{Voting.\-h}}
+\subsubsection[{go}]{\setlength{\rightskip}{0pt plus 5cm}void go (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{input, }
+\item[{ostream \&}]{o}
+\end{DoxyParamCaption}
+)}}\label{Voting_8h_a909712a187183d0648ea5902f8bd6a1f}
+The main function (aside from the main in Run\-Voting.\-c++). \hyperlink{Voting_8c_09_09_a909712a187183d0648ea5902f8bd6a1f}{go()} calls upon all of the above function to reach a winner. \hyperlink{Voting_8c_09_09_a909712a187183d0648ea5902f8bd6a1f}{go()} also will do this x number of times (test cases) \hypertarget{Voting_8h_a0de3afd15c6b7ea2a12b3455b224f56e}{\index{Voting.\-h@{Voting.\-h}!parse\-\_\-input@{parse\-\_\-input}}
+\index{parse\-\_\-input@{parse\-\_\-input}!Voting.h@{Voting.\-h}}
+\subsubsection[{parse\-\_\-input}]{\setlength{\rightskip}{0pt plus 5cm}void parse\-\_\-input (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{input, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-running}
+\end{DoxyParamCaption}
+)}}\label{Voting_8h_a0de3afd15c6b7ea2a12b3455b224f56e}
+parse\-\_\-input parses the istream (input,cin) and puts them all into a vector of candidates. Optimization comes into play by using a deque for ballots. Instead of iterating through the entire line of preferences, pop() the preferences until a valid one is reached \hypertarget{Voting_8h_a8a7f560a8cd57d9bd6536a829943f9c0}{\index{Voting.\-h@{Voting.\-h}!pre\-\_\-eval@{pre\-\_\-eval}}
+\index{pre\-\_\-eval@{pre\-\_\-eval}!Voting.h@{Voting.\-h}}
+\subsubsection[{pre\-\_\-eval}]{\setlength{\rightskip}{0pt plus 5cm}void pre\-\_\-eval (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-running, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-loosers, }
+\item[{vector$<$ int $>$ \&}]{running\-\_\-ids}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{Voting_8h_a8a7f560a8cd57d9bd6536a829943f9c0}
+Pre Eval handles the first pass of ballots only. It redistributes the candidates in the running pool to the candidates in the loosing pool (if need be). Pre Eval is only called once after parse input, and is never called again. \hypertarget{Voting_8h_ad79946fd82cde82dee8787630686b33d}{\index{Voting.\-h@{Voting.\-h}!print\-\_\-state\-\_\-loosing@{print\-\_\-state\-\_\-loosing}}
+\index{print\-\_\-state\-\_\-loosing@{print\-\_\-state\-\_\-loosing}!Voting.h@{Voting.\-h}}
+\subsubsection[{print\-\_\-state\-\_\-loosing}]{\setlength{\rightskip}{0pt plus 5cm}void print\-\_\-state\-\_\-loosing (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-loosing}
+\end{DoxyParamCaption}
+)}}\label{Voting_8h_ad79946fd82cde82dee8787630686b33d}
+\hypertarget{Voting_8h_a4b4998d94433fb40fa8af618230fe638}{\index{Voting.\-h@{Voting.\-h}!print\-\_\-state\-\_\-running@{print\-\_\-state\-\_\-running}}
+\index{print\-\_\-state\-\_\-running@{print\-\_\-state\-\_\-running}!Voting.h@{Voting.\-h}}
+\subsubsection[{print\-\_\-state\-\_\-running}]{\setlength{\rightskip}{0pt plus 5cm}void print\-\_\-state\-\_\-running (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-running}
+\end{DoxyParamCaption}
+)}}\label{Voting_8h_a4b4998d94433fb40fa8af618230fe638}
