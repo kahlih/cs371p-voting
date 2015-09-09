@@ -198,6 +198,69 @@ void go(istream &input, ostream &o) {
 		running_ids.clear();
 		if (t != tests-1)
 			o << endl;
-
 	}
+
+
+	// auto test generation
+	/*int numCases = rand() % 10;
+	cout << numCases << endl << endl;
+
+	for(int i = 0; i < numCases; i++) {
+
+		int numCandidates = rand() % 20;
+		cout << numCandidates << endl;
+		vector<string> candidateNames;
+
+		for(int a = 0; a < numCandidates; a++) {
+			char c = a + 65;
+			stringstream ss;
+			string s;
+			ss << c;
+			ss >> s;
+			candidateNames.push_back(s);
+		}
+
+		// alternate random name
+		// for(int j = 0; j < numCandidates; j++) {
+
+		// 	int nameLength = rand()%80;
+		// 	string currName;
+		// 	for(int k = 0; k < nameLength; k++) {
+		// 		char c = rand()%256;
+		// 		currName[k] = c;
+		// 	}
+		// 	candidateNames.push_back(currName);
+		// }
+
+		for(string s : candidateNames) {
+			cout << s << endl;
+		}
+
+		// ballots
+		int numBallots = rand() % 1000;
+		for(int j = 0; j < numBallots; j++) {
+
+			// get list of ballots yet to be voted for
+			vector<int> currBallots;
+			for(int k = 1; k <= numCandidates; k++) {
+				currBallots.push_back(k);
+			}
+
+			// vote for each candidate once
+			while(currBallots.size() > 0) {
+				int someVote = rand() % numCandidates;
+
+				// make sure someVote hasn't already been used
+				if(find(currBallots.begin(), currBallots.end(), someVote) == currBallots.end()) {
+					currBallots.erase(currBallots.begin() + someVote);
+
+					if(currBallots.size() != 1) 	cout << someVote << " ";
+					else 							cout << someVote;
+				}
+			}
+			cout << endl;
+		}
+		cout << endl;
+	}
+	cout << endl;*/
 }
