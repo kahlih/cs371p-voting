@@ -18,50 +18,34 @@
 
 using namespace std;
 
-vector<candidate> candidates_running;
-vector<candidate> candidates_loosers;
-vector<int> running_ids;
 int num_of_ballots;
 
-bool debug = false;
-bool trace = false;
-bool debug_parse_input = false;
-bool debug_pre_eval = false;
-bool debug_go = false;
-bool debug_check_running = true;
-bool debug_eval = true;
+/**
+ * \mainpage Voting
+ * This program implements the Australian Voting system.
+ * 
+ * If there is a candidate with > 50% of the votes, he is the winner. 
+ * Else, looser pool ballots are considered until a candidate reaches the > 50% mark 
+ */
 
-void print_state_running(){
-	cout << "candidates_running: " << endl;
-	for (candidate c : candidates_running){
-		c.print_candidate();
-	}
-}
-void print_state_loosing(){
-	cout << "candidates_loosers: " << endl;
-	for (candidate c : candidates_loosers){
-		c.print_candidate();
-	}
-}
 
+ /**
+  * Pre Eval handles the first pass of ballots only.
+  * It redistributes the candidates in the running pool to the candidates in the loosing pool (if need be).
+  * Pre Eval is only called once after parse input, and is never called again.
+  */
 // analyze the first column
-inline void pre_eval(){
-	if (debug && trace){
-		cout << "Entering Pre_Eval()" << endl;
-	}
+inline void pre_eval(vector<candidate> &candidates_running, vector<candidate> &candidates_loosers, vector<int> &running_ids) {
 
+	//Testing purposes
+	if (num_of_ballots == 0){
+		num_of_ballots = 3;
+	}
 	size_t mn = num_of_ballots;
 	size_t mx = 0;
-	for (candidate c : candidates_running){
+	for (candidate c : candidates_running) {
 		mn = min(c.ballots.size(),mn);
 		mx = max(c.ballots.size(), mx);
-	}
-
-	if (debug && debug_pre_eval){
-		cout << "State upon Entering: " << endl;
-		print_state_running(); 
-		print_state_loosing();
-		cout << "\n\nNow entinring for loop: " << endl;
 	}
 
 	// Moving candidates with tied for last into the looser pool
@@ -69,66 +53,31 @@ inline void pre_eval(){
 	for(size_t i = 0; i <candidates_running.size() && (mx!=mn); i++) {
 
 		candidate c = candidates_running[i];
-
-		if (debug && debug_pre_eval){
-			cout << "Viewing Candidate at " << i << " position: " << endl;
-			c.print_candidate();			
-		}
-
-		if (c.ballots.size() == mn){
-			if (debug && debug_pre_eval){
-				cout << "Before Removal State: " << endl;
-				print_state_running();
-				print_state_loosing();
-				cout << "\n" << endl;
-				cout << "Removing candidate at " << i << " position: " << endl;
-				c.print_candidate();			
-			}
+		if (c.ballots.size() == mn) {
 			candidates_loosers.push_back(c);
 			candidates_running.erase(candidates_running.begin()+i);
 			i--;
-			if (debug && debug_pre_eval){
-				cout << "After Removal, new state: " << endl;
-				print_state_running();
-				print_state_loosing();			
-			}
 		}
-		else {
-			running_ids.push_back(c.id);
-		}
-	}
-	if (debug && debug_pre_eval){
-		print_state_running();
-		print_state_loosing();
-	}
-	if (debug && trace){
-		cout << "Leaving Pre_Eval()" << endl;	
+		else running_ids.push_back(c.id);
 	}
 }
-
-bool checkRunning(){
-	if (debug && trace){
-		cout << "Entering checkRunning()" << endl;
-	}
-
-	if(debug && debug_check_running) {
-		cout << "state at beginning of checkRunning" << endl;
-		print_state_running();
-		print_state_loosing();
-	}
-
+/**
+ * check_running is where we verify we have a winner or someone tied for the winning position.
+ * It outputs to the ostream, o, and returns a boolean to signify that we now need to exit the program.
+ */
+bool check_running(ostream &o, vector<candidate> &candidates_running, vector<candidate> &candidates_loosers, vector<int> &running_ids) {
 	size_t mn = num_of_ballots;
 	size_t mx = 0;
+
+	// Testing Purposes
+	if (num_of_ballots==0){
+		num_of_ballots = 3;
+	}
 
 	// Check if there is a Winner > %50 votes
 	for (candidate c : candidates_running) {
 		if ((double) c.ballots.size() / num_of_ballots > .5) {
-			cout << c.name << endl;
-
-			if(debug && debug_check_running) {
-				cout << " found our winner: " << c.name << endl;
-				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
-			}
+			o << c.name << endl;
 			return true;
 		}
 		mn = min(mn, c.ballots.size());
@@ -136,23 +85,16 @@ bool checkRunning(){
 	}
 	// check for tie
 	if (mn == mx && candidates_loosers.size() == 0) {
-		
-		if(debug && debug_check_running) {
-			cout << "found our winners: " << endl;
-		}
 
-		for (candidate c : candidates_running){
-			cout << c.name << endl;
-			if(debug && debug_check_running) {
-				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
-			}
+		for (candidate c : candidates_running) {
+			o << c.name << endl;
 		}
 
 		return true;
 	}
 
 	// otherwise move bottom tier to losers
-	if (candidates_loosers.size()==0){
+	if (candidates_loosers.size()==0) {
 		for(int i = 0; i < (int) candidates_running.size(); i++) {
 			candidate c = candidates_running[i];
 			if(c.ballots.size() == mn) {
@@ -166,33 +108,34 @@ bool checkRunning(){
 		}
 	}
 
-	if (debug && trace){
-		cout << "Leaving checkRunning()" << endl;
-	}
 	return false;
 }
 
-// evaluate from the second column onward
-// check if we found a winner at the beginning
-// only consider those in the losers pool
-void eval() {
+/**
+ * eval redistributes the votes to the respective candidates, and calls upon check_running to see if the 
+ * redistribution resulted in a winner. Else, candidates_running creates another looser pool for which 
+ * eval() must handle once more, until a winner (or tie) is reached
+ */
+///
+/// Notes:
+/// evaluate from the second column onward
+/// check if we found a winner at the beginning
+/// only consider those in the losers pool
+///
+void eval(ostream &o, vector<candidate> &candidates_running, vector<candidate> &candidates_loosers, vector<int> &running_ids) {
 
-	if(debug && trace) {
-		cout << "Entering eval()" << endl;
+	// Testing purposes
+	if (num_of_ballots==0){
+		num_of_ballots=5;
 	}
-
-	if(debug && debug_eval) {
-		cout << "\n\n\n\nlooking for a winner\n\n" << endl;
-	}
-
-	if (checkRunning()) {
+	if (check_running(o,candidates_running,candidates_loosers,running_ids)) {
 		return;
 	}
 
 	for (int i = 0; i < (int)candidates_loosers.size(); i++) {
 		
 		candidate* looser = &candidates_loosers[i];
-		for (deque<int> b : looser->ballots){
+		for (deque<int> b : looser->ballots) {
 
 			int value;
 			while(!b.empty()) {
@@ -210,11 +153,6 @@ void eval() {
 				if (runner.id == value) {
 					runner.ballots.push_back(b);
 					
-					if(debug && debug_eval) {
-						cout << "ballot size after pushing: " << runner.ballots.size() << endl;
-						print_state_running();
-						print_state_loosing();
-					}
 					break;
 				}
 			}
@@ -223,11 +161,7 @@ void eval() {
 		i--;
 	}
 
-	eval();
-
-	if(debug && trace) {
-		cout << "Leaving eval()" << endl;
-	}
+	eval(o, candidates_running, candidates_loosers, running_ids);
 
 }
 
@@ -235,20 +169,18 @@ void eval() {
 // parse_input
 // ------------
 
-void parse_input(istream &input) {
+/**
+ * parse_input parses the istream (input,cin) and puts them all into a vector of candidates.
+ * Optimization comes into play by using a deque for ballots. Instead of iterating through the entire
+ * line of preferences, pop() the preferences until a valid one is reached
+ */
+void parse_input(istream &input, vector<candidate> &candidates_running) {
 
-	if(debug && trace) {
-		cout << "Entering parse_input()" << endl;
-	}
 
 	// get number of candidates
 	string num_candidates_str;
 	getline(input, num_candidates_str);
 	int num_candidates = atoi(num_candidates_str.c_str());
-
-	// allocate storage for candidates
-	//candidates_running.resize(num_candidates);
-	//candidates_loosers.resize(num_candidates);
 
 	// create candidates_running
 	for(int i = 0; i < num_candidates; i++) {
@@ -257,11 +189,6 @@ void parse_input(istream &input) {
 
 		candidate curr_cand(name, i+1);
 		candidates_running.push_back(curr_cand);
-	}
-	if (debug && debug_parse_input){
-		cout<< "Printing state before inputing ballots" << endl;
-		print_state_running();
-		print_state_loosing();
 	}
 	// read ballots
 	string ballot_line;
@@ -274,29 +201,18 @@ void parse_input(istream &input) {
 			dq.push_back(atoi(b.c_str()));
 
 		int index = dq.front()-1;
-		/*if (debug && debug_parse_input){
-			cout<< "Indexing at : " << index << endl;
-			print_state();
-		}*/
 		dq.pop_front();
 		candidates_running[index].ballots.push_back(dq);
 	}
-	if (debug && debug_parse_input){
-		cout<< "Printing state after inputing ballots" << endl;
-		print_state_running();
-		print_state_loosing();
-	}
-	//print_state();
-	if(debug && trace) {
-		cout << "Leaving parse_input()" << endl;
-	}
 }
 
-
+/**
+ * The main function (aside from the main in RunVoting.c++).
+ * go() calls upon all of the above function to reach a winner.   
+ * go() also will do this x number of times (test cases)
+ */
 void go(istream &input, ostream &o) {
-	if(debug && trace) {
-		cout << "Entering go" << endl;
-	}
+
 	string num_tests;
 	getline(input, num_tests); // 2
 
@@ -304,21 +220,18 @@ void go(istream &input, ostream &o) {
 	getline(input, dummy);
 
 	int tests = atoi(num_tests.c_str());
-	// test cases
+	// loop for each test
 	for(int t = 0; t < tests; t++) {
-		parse_input(input);
-		pre_eval();
-		eval();
-		//print_state_running();
-		//print_state_loosing();
+		vector<candidate> candidates_running;
+		vector<candidate> candidates_loosers;
+		vector<int> running_ids;
+		parse_input(input,candidates_running);
+		pre_eval(candidates_running, candidates_loosers,running_ids);
+		eval(o,candidates_running, candidates_loosers, running_ids);
 		candidates_running.clear();
 		candidates_loosers.clear();
 		running_ids.clear();
 		if (t != tests-1)
-			cout << endl;
-
-	}
-	if(debug && trace) {
-		cout << "Leaving go()" << endl;
+			o << endl;
 	}
 }

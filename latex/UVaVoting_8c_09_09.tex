@@ -1,0 +1,115 @@
+\hypertarget{UVaVoting_8c_09_09}{\section{U\-Va\-Voting.\-c++ File Reference}
+\label{UVaVoting_8c_09_09}\index{U\-Va\-Voting.\-c++@{U\-Va\-Voting.\-c++}}
+}
+{\ttfamily \#include $<$string$>$}\\*
+{\ttfamily \#include $<$vector$>$}\\*
+{\ttfamily \#include $<$iostream$>$}\\*
+{\ttfamily \#include $<$cstring$>$}\\*
+{\ttfamily \#include $<$sstream$>$}\\*
+{\ttfamily \#include $<$algorithm$>$}\\*
+{\ttfamily \#include $<$iterator$>$}\\*
+{\ttfamily \#include $<$deque$>$}\\*
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classcandidate}{candidate}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{UVaVoting_8c_09_09_ad79946fd82cde82dee8787630686b33d}{print\-\_\-state\-\_\-loosing} (vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-loosing)
+\item 
+void \hyperlink{UVaVoting_8c_09_09_a4b4998d94433fb40fa8af618230fe638}{print\-\_\-state\-\_\-running} (vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-running)
+\item 
+void \hyperlink{UVaVoting_8c_09_09_a8a7f560a8cd57d9bd6536a829943f9c0}{pre\-\_\-eval} (vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-running, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-loosing, vector$<$ int $>$ \&running\-\_\-ids)
+\item 
+bool \hyperlink{UVaVoting_8c_09_09_a5a44358626507312e91ec4bd767d74c9}{check\-\_\-running} (ostream \&o, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-running, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-loosing, vector$<$ int $>$ \&running\-\_\-ids)
+\item 
+void \hyperlink{UVaVoting_8c_09_09_ab39aeba1ab637843b2bdc2e21f16348d}{eval} (ostream \&o, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-running, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-loosing, vector$<$ int $>$ \&running\-\_\-ids)
+\item 
+void \hyperlink{UVaVoting_8c_09_09_a0de3afd15c6b7ea2a12b3455b224f56e}{parse\-\_\-input} (istream \&input, vector$<$ \hyperlink{classcandidate}{candidate} $>$ \&candidates\-\_\-running)
+\item 
+void \hyperlink{UVaVoting_8c_09_09_a909712a187183d0648ea5902f8bd6a1f}{go} (istream \&input, ostream \&o)
+\item 
+int \hyperlink{UVaVoting_8c_09_09_ae66f6b31b5ad750f1fe042a706a4e3d4}{main} ()
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{UVaVoting_8c_09_09_ab33dcfe8c5cb1f68caa6b2ae99c1bb75}{num\-\_\-of\-\_\-ballots}
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\hypertarget{UVaVoting_8c_09_09_a5a44358626507312e91ec4bd767d74c9}{\index{U\-Va\-Voting.\-c++@{U\-Va\-Voting.\-c++}!check\-\_\-running@{check\-\_\-running}}
+\index{check\-\_\-running@{check\-\_\-running}!UVaVoting.c++@{U\-Va\-Voting.\-c++}}
+\subsubsection[{check\-\_\-running}]{\setlength{\rightskip}{0pt plus 5cm}bool check\-\_\-running (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{o, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-running, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-loosing, }
+\item[{vector$<$ int $>$ \&}]{running\-\_\-ids}
+\end{DoxyParamCaption}
+)}}\label{UVaVoting_8c_09_09_a5a44358626507312e91ec4bd767d74c9}
+\hypertarget{UVaVoting_8c_09_09_ab39aeba1ab637843b2bdc2e21f16348d}{\index{U\-Va\-Voting.\-c++@{U\-Va\-Voting.\-c++}!eval@{eval}}
+\index{eval@{eval}!UVaVoting.c++@{U\-Va\-Voting.\-c++}}
+\subsubsection[{eval}]{\setlength{\rightskip}{0pt plus 5cm}void eval (
+\begin{DoxyParamCaption}
+\item[{ostream \&}]{o, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-running, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-loosing, }
+\item[{vector$<$ int $>$ \&}]{running\-\_\-ids}
+\end{DoxyParamCaption}
+)}}\label{UVaVoting_8c_09_09_ab39aeba1ab637843b2bdc2e21f16348d}
+\hypertarget{UVaVoting_8c_09_09_a909712a187183d0648ea5902f8bd6a1f}{\index{U\-Va\-Voting.\-c++@{U\-Va\-Voting.\-c++}!go@{go}}
+\index{go@{go}!UVaVoting.c++@{U\-Va\-Voting.\-c++}}
+\subsubsection[{go}]{\setlength{\rightskip}{0pt plus 5cm}void go (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{input, }
+\item[{ostream \&}]{o}
+\end{DoxyParamCaption}
+)}}\label{UVaVoting_8c_09_09_a909712a187183d0648ea5902f8bd6a1f}
+\hypertarget{UVaVoting_8c_09_09_ae66f6b31b5ad750f1fe042a706a4e3d4}{\index{U\-Va\-Voting.\-c++@{U\-Va\-Voting.\-c++}!main@{main}}
+\index{main@{main}!UVaVoting.c++@{U\-Va\-Voting.\-c++}}
+\subsubsection[{main}]{\setlength{\rightskip}{0pt plus 5cm}int main (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{UVaVoting_8c_09_09_ae66f6b31b5ad750f1fe042a706a4e3d4}
+\hypertarget{UVaVoting_8c_09_09_a0de3afd15c6b7ea2a12b3455b224f56e}{\index{U\-Va\-Voting.\-c++@{U\-Va\-Voting.\-c++}!parse\-\_\-input@{parse\-\_\-input}}
+\index{parse\-\_\-input@{parse\-\_\-input}!UVaVoting.c++@{U\-Va\-Voting.\-c++}}
+\subsubsection[{parse\-\_\-input}]{\setlength{\rightskip}{0pt plus 5cm}void parse\-\_\-input (
+\begin{DoxyParamCaption}
+\item[{istream \&}]{input, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-running}
+\end{DoxyParamCaption}
+)}}\label{UVaVoting_8c_09_09_a0de3afd15c6b7ea2a12b3455b224f56e}
+\hypertarget{UVaVoting_8c_09_09_a8a7f560a8cd57d9bd6536a829943f9c0}{\index{U\-Va\-Voting.\-c++@{U\-Va\-Voting.\-c++}!pre\-\_\-eval@{pre\-\_\-eval}}
+\index{pre\-\_\-eval@{pre\-\_\-eval}!UVaVoting.c++@{U\-Va\-Voting.\-c++}}
+\subsubsection[{pre\-\_\-eval}]{\setlength{\rightskip}{0pt plus 5cm}void pre\-\_\-eval (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-running, }
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-loosing, }
+\item[{vector$<$ int $>$ \&}]{running\-\_\-ids}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{UVaVoting_8c_09_09_a8a7f560a8cd57d9bd6536a829943f9c0}
+\hypertarget{UVaVoting_8c_09_09_ad79946fd82cde82dee8787630686b33d}{\index{U\-Va\-Voting.\-c++@{U\-Va\-Voting.\-c++}!print\-\_\-state\-\_\-loosing@{print\-\_\-state\-\_\-loosing}}
+\index{print\-\_\-state\-\_\-loosing@{print\-\_\-state\-\_\-loosing}!UVaVoting.c++@{U\-Va\-Voting.\-c++}}
+\subsubsection[{print\-\_\-state\-\_\-loosing}]{\setlength{\rightskip}{0pt plus 5cm}void print\-\_\-state\-\_\-loosing (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-loosing}
+\end{DoxyParamCaption}
+)}}\label{UVaVoting_8c_09_09_ad79946fd82cde82dee8787630686b33d}
+\hypertarget{UVaVoting_8c_09_09_a4b4998d94433fb40fa8af618230fe638}{\index{U\-Va\-Voting.\-c++@{U\-Va\-Voting.\-c++}!print\-\_\-state\-\_\-running@{print\-\_\-state\-\_\-running}}
+\index{print\-\_\-state\-\_\-running@{print\-\_\-state\-\_\-running}!UVaVoting.c++@{U\-Va\-Voting.\-c++}}
+\subsubsection[{print\-\_\-state\-\_\-running}]{\setlength{\rightskip}{0pt plus 5cm}void print\-\_\-state\-\_\-running (
+\begin{DoxyParamCaption}
+\item[{vector$<$ {\bf candidate} $>$ \&}]{candidates\-\_\-running}
+\end{DoxyParamCaption}
+)}}\label{UVaVoting_8c_09_09_a4b4998d94433fb40fa8af618230fe638}
+
+
+\subsection{Variable Documentation}
+\hypertarget{UVaVoting_8c_09_09_ab33dcfe8c5cb1f68caa6b2ae99c1bb75}{\index{U\-Va\-Voting.\-c++@{U\-Va\-Voting.\-c++}!num\-\_\-of\-\_\-ballots@{num\-\_\-of\-\_\-ballots}}
+\index{num\-\_\-of\-\_\-ballots@{num\-\_\-of\-\_\-ballots}!UVaVoting.c++@{U\-Va\-Voting.\-c++}}
+\subsubsection[{num\-\_\-of\-\_\-ballots}]{\setlength{\rightskip}{0pt plus 5cm}int num\-\_\-of\-\_\-ballots}}\label{UVaVoting_8c_09_09_ab33dcfe8c5cb1f68caa6b2ae99c1bb75}

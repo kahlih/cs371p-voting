@@ -1,0 +1,198 @@
+commit 6f5049d0536023290bcdb7dec002fc009096aff6
+Author: Ubuntu <spencershadley@utexas.edu>
+Date:   Wed Sep 9 03:57:15 2015 -0500
+
+    renamed RunVoting
+
+commit 17edc0a0c22ee03797647a8701338324833e3771
+Merge: 129b0dd 009da74
+Author: Ubuntu <spencershadley@utexas.edu>
+Date:   Wed Sep 9 03:52:14 2015 -0500
+
+    Merge branch 'dev' of github.com:kahlih/cs371p-voting into dev
+
+commit 009da74e815f5a68963cd2ca06a8330cf4aa83a7
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Thu Sep 24 12:54:53 2015 -0500
+
+    added documentation
+
+commit 129b0ddf327f2ff9b567fb3743a8233d6bbd8b61
+Author: Ubuntu <spencershadley@utexas.edu>
+Date:   Wed Sep 9 03:52:04 2015 -0500
+
+    added 100 randomly generated test cases
+
+commit 449dd28bfb1a09729b15fd9a1f4415f1508b9069
+Author: Ubuntu <spencershadley@utexas.edu>
+Date:   Wed Sep 9 02:30:27 2015 -0500
+
+    started working on auto test generation
+
+commit 51cd632c0c706897c7deb5e929300b90592d0ae8
+Author: Ubuntu <spencershadley@utexas.edu>
+Date:   Wed Sep 9 01:52:26 2015 -0500
+
+    added cases to RunVoting by hand
+
+commit b9c11c9cc592438434c3aaf6b9181cf2028f2693
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Wed Sep 23 22:11:17 2015 -0500
+
+    fixed UVa file, passes
+
+commit 6a8c6cddc57ab883e90e1fe0b385c4a136a4fc7e
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Wed Sep 23 22:04:55 2015 -0500
+
+    now have 15 tests
+
+commit 2bf258a9e045c75327fb078eae59ae6c43645cbf
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Wed Sep 23 21:54:31 2015 -0500
+
+    most tests done
+
+commit 38cd5455a2d0d603cd689198b42e347d6e4bcafa
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Wed Sep 23 21:15:21 2015 -0500
+
+    updated TestVoting.c++ with more tests
+
+commit a02a0046bcf2d9d3a7718e0263a4f1aa0884cda9
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Wed Sep 23 18:41:40 2015 -0500
+
+    refactored code
+
+commit 05d78184c5adea5cfe432dc53ede2a4d698fb0ef
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Wed Sep 23 17:31:15 2015 -0500
+
+    added tests for go() function
+
+commit 2616cd5121f846cb6215ff8978cda06688ca886a
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Wed Sep 23 17:13:13 2015 -0500
+
+    adding first test case in TestVoting.c++
+
+commit 1f85ea9cd3712b50ee5eaaf62346b02631a2a1dc
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Wed Sep 23 17:01:01 2015 -0500
+
+    changed output method from cout to using our ostream
+
+commit 2d3d4eca09c4e88dc824b053e47ecd40c695079a
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Tue Sep 22 21:40:18 2015 -0500
+
+    confirmed working test cases
+
+commit d758f54b5c2a1b98be7ab978092f52b4b8d88b8f
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Tue Sep 22 21:39:58 2015 -0500
+
+    confirmed working test cases
+
+commit 947522f9304e5fa2d2955a393ffca190a4f1f645
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Tue Sep 22 21:06:12 2015 -0500
+
+    fixing travis
+
+commit 19d44127c9b479dfed0e2facffe167d6244f6213
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Tue Sep 22 20:54:00 2015 -0500
+
+    fixed makefile
+
+commit 44b9bc6ae5a479ba3dd0293c9d6dbf3680015301
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Tue Sep 22 20:50:04 2015 -0500
+
+    added test files to pass travis
+
+commit 10e9655093715a5f62dcd422906ac087e9dc2a14
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Tue Sep 22 20:36:50 2015 -0500
+
+    trying to get travis to pass
+
+commit 16309cd574bf3f7ece9162a6ecb094af522e51d1
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Tue Sep 22 20:29:45 2015 -0500
+
+    WORKING, WOOO, fixes #5
+
+commit bb5d65be307a7669386633f7e48029c3975c5273
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Sat Sep 19 17:37:28 2015 -0500
+
+    working version
+
+commit 56269fca05b76ffb1fd7233022ef23e72318d3ca
+Author: spencer-shadley <spencershadley@utexas.edu>
+Date:   Sat Sep 19 17:01:24 2015 -0500
+
+    finished corner case, fixes #4 fixes#7 fixes #17
+
+commit cf14fbc47bb7d927cc2e6dccfdd6ed2b2754e4d8
+Author: spencer-shadley <spencershadley@utexas.edu>
+Date:   Sat Sep 19 16:26:32 2015 -0500
+
+    basic test case working
+
+commit 4f02bc711325a309875ae3c84e2a0badaff1b572
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Sat Sep 19 14:44:09 2015 -0500
+
+    overall winner case working, fixes #14, fixes #15, fixes #12, fixes #11, fixes #9
+
+commit 51a3b06d93d84216381d0940328e44dd90b62b34
+Author: spencer-shadley <spencershadley@utexas.edu>
+Date:   Fri Sep 18 17:23:33 2015 -0500
+
+    overload the equals :) but we segfault
+
+commit 07e259848c5e7acc1d10c9437083f376e356a64b
+Author: spencer-shadley <spencershadley@utexas.edu>
+Date:   Wed Sep 16 19:26:03 2015 -0500
+
+    added comments for pre_eval/eval state about moving candidates
+
+commit 37ab916802fdd4925a15892a0418b14daf780d87
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Wed Sep 16 19:05:56 2015 -0500
+
+    in progress distributing candidates between winning and losing pools
+
+commit 7e00c01d79bedb2c4c772f50a34749cf84840501
+Author: spencer-shadley <spencershadley@utexas.edu>
+Date:   Tue Sep 15 22:10:01 2015 -0500
+
+    fixed seg fault
+
+commit db9d093b152357f511e62a36739e577ab4a4b204
+Author: spencer-shadley <spencershadley@utexas.edu>
+Date:   Tue Sep 15 21:26:23 2015 -0500
+
+    compiled version parsing input
+
+commit 567d54ad9cd5d8319ea5633da965bdffc06bb863
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Tue Sep 15 19:17:28 2015 -0500
+
+    testing travis
+
+commit 103ab2e803f37d8d561dbd35bc0d60fe29457e6c
+Author: Kahli Holmes <kahliholmes@utexas.edu>
+Date:   Tue Sep 15 19:15:24 2015 -0500
+
+    initial commit
+
+commit 4bb5c428e8e4885ec2556edd44d2aa77798247b4
+Author: spencer-shadley <spencershadley@utexas.edu>
+Date:   Tue Sep 15 19:12:37 2015 -0500
+
+    added makefile

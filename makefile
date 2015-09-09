@@ -101,6 +101,12 @@ TestVoting.tmp: TestVoting
 	$(GCOV) -b TestVoting.c++ | grep -A 5 "File 'TestVoting.c++'" >> TestVoting.tmp
 	cat TestVoting.tmp
 
+TestVoting.out: TestVoting
+	$(VALGRIND) ./TestVoting                                       >  TestVoting.out 2>&1
+	$(GCOV) -b Voting.c++     | grep -A 5 "File 'Voting.c++'"     >> TestVoting.out
+	$(GCOV) -b TestVoting.c++ | grep -A 5 "File 'TestVoting.c++'" >> TestVoting.out
+	cat TestVoting.out
+
 Voting-tests/%: %
 	@cp $^ $@
 
