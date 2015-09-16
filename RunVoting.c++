@@ -1,7 +1,7 @@
 #include <iostream>
-#include "Collatz.h"
+#include "Voting.h"
 
 int main(){
-	voting_solve(cin,cout);
+	parse_input(cin,cout);
 	return 0;
 }
