@@ -20,16 +20,16 @@ using namespace std;
 class candidate {
 
 	public:
-		candidate(string pname, long long pcount) {
+		candidate(string pname) {
 			name = pname;
-			count = pcount;
 		}
 		string name;
-		long long count;
 		deque<deque<string>> ballots;
 
 
 };
 
-
-void parse_input(istream &input, ostream &o);
+void pre_eval();
+void eval();
+void parse_input(istream &input);
+void go(istream &input, ostream &o);

@@ -4,6 +4,6 @@
 using namespace std;
 
 int main(){
-	parse_input(cin,cout);
+	go(cin,cout);
 	return 0;
 }
