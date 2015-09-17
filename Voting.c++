@@ -34,6 +34,17 @@ void print_state(){
 	}
 }
 
+// basically just a move analyzing the first column
+// TODO: pre_eval will find the maximum
+// TODO: pre_eval will see who is not the max
+// TODO: pre_eval will move those people to losers and remove from running
+// above could use get() but that is O(N)
+// may need to find another solution for finding/moving
+// will be using size of deque as their count
+// don't check if we found a winner
+
+// solution to above
+// keep a counter of where we are in moving through the candidates and remove at that index
 inline void pre_eval(){
 	int m = 0;
 	for (candidate c : candidates_running){
@@ -47,6 +58,9 @@ inline void pre_eval(){
 	}
 }
 
+// evaluate from the second column onward
+// check if we found a winner at the beginning
+// only consider those in the losers pool
 void eval(){
 
 
