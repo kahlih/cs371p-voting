@@ -12,7 +12,6 @@
 #include <iostream>
 #include <cstring>
 #include <sstream>
-//#include <boost/algorithm/string.happ>
 #include "Voting.h"
 
 using namespace std;
@@ -20,6 +19,8 @@ using namespace std;
 vector<candidate> candidates_running;
 vector<candidate> candidate_loosers;
 
+bool debug = true;
+bool deubg_parse_input = true;
 
 void print_state(){
 	for (candidate c : candidates_running){
@@ -48,12 +49,15 @@ void print_state(){
 inline void pre_eval(){
 	int m = 0;
 	for (candidate c : candidates_running){
-		m = max(c.ballots.size(),m);
+		m = max((int) c.ballots.size(),m);
 	}
-	for (candidate c : candidates_running){
-		if (c.ballots.size() != m){
-			candidate_loosers.push_back(c);
-			candidates_running.pop_front
+
+	for(int i = 0; i < (int) candidates_running.size(); i++) {
+		candidate c = candidates_running[i];
+		if ((int) c.ballots.size() != m){
+			candidate_loosers[i] = c;
+			candidate null_candidate; // TODO: wth happened
+			candidates_running[i] = null_candidate;
 		}
 	}
 }
@@ -61,7 +65,7 @@ inline void pre_eval(){
 // evaluate from the second column onward
 // check if we found a winner at the beginning
 // only consider those in the losers pool
-void eval(){
+void eval() {
 
 
 }
@@ -72,11 +76,21 @@ void eval(){
 
 void parse_input(istream &input) {
 
-	string num_candidates;
-	getline(input, num_candidates);
+	if(debug && deubg_parse_input) {
+		// stuff...
+	}
+
+	// get number of candidates
+	string num_candidates_str;
+	getline(input, num_candidates_str);
+	int num_candidates = atoi(num_candidates_str.c_str());
+
+	// allocate storage for candidates
+	candidates_running.resize(num_candidates);
+	candidate_loosers.resize(num_candidates);
 
 	// create candidates_running
-	for(int i = 0; i < atoi(num_candidates.c_str()); i++) {
+	for(int i = 0; i < num_candidates; i++) {
 		string name;
 		getline(input, name);
 
@@ -91,16 +105,14 @@ void parse_input(istream &input) {
 
 		string b;
 		stringstream stream(ballot_line);
-		while (getline(stream, b, ' ')){
+		while (getline(stream, b, ' '))
 			dq.push_back(b);
-		}
+
 		int index = atoi(dq.front().c_str())-1;
 		dq.pop_front();
 		candidates_running[index].ballots.push_back(dq);
 	}
-
 	//print_state();
-
 }
 
 

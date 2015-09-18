@@ -23,9 +23,17 @@ class candidate {
 		candidate(string pname) {
 			name = pname;
 		}
+		candidate() {}
 		string name;
 		deque<deque<string>> ballots;
 
+		candidate operator=(candidate& rhs) {
+			
+			this->name = rhs.name;
+			this->ballots = rhs.ballots;
+
+			return *this;
+		}
 
 };
 
