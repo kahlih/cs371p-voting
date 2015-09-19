@@ -12,10 +12,9 @@
 #include <iostream>
 #include <cstring>
 #include <sstream>
-#include "Voting.h"
-
 #include <algorithm>
 #include <iterator>
+#include "Voting.h"
 
 using namespace std;
 
@@ -25,10 +24,12 @@ vector<int> running_ids;
 int num_of_ballots;
 
 bool debug = false;
+bool trace = false;
 bool debug_parse_input = false;
 bool debug_pre_eval = false;
 bool debug_go = false;
 bool debug_check_running = true;
+bool debug_eval = true;
 
 void print_state_running(){
 	cout << "candidates_running: " << endl;
@@ -43,19 +44,9 @@ void print_state_loosing(){
 	}
 }
 
-// basically just a move analyzing the first column
-// TODO: pre_eval will find the maximum
-// TODO: pre_eval will see who is not the max
-// TODO: pre_eval will move those people to losers and remove from running
-// above could use get() but that is O(N)
-// may need to find another solution for finding/moving
-// will be using size of deque as their count
-// don't check if we found a winner
-
-// solution to above
-// keep a counter of where we are in moving through the candidates and remove at that index
+// analyze the first column
 inline void pre_eval(){
-	if (debug && debug_pre_eval){
+	if (debug && trace){
 		cout << "Entering Pre_Eval()" << endl;
 	}
 
@@ -89,31 +80,72 @@ inline void pre_eval(){
 			running_ids.push_back(c.id);
 		}
 	}
-	if (debug && debug_pre_eval){
-		print_state_running();
+	if (debug && trace){
 		cout << "Leaving Pre_Eval()" << endl;	
 	}
 }
 
 bool checkRunning(){
-	if (debug && debug_check_running){
+	if (debug && trace){
 		cout << "Entering checkRunning()" << endl;
 	}
-	//Check if there is a Winner > %50 votes
-	for (candidate c : candidates_running){
-		if ((double)c.ballots.size()/num_of_ballots > .5){
-			cout << c.name << endl;
-			return true;
-		}
+
+	if(debug && debug_check_running) {
+		cout << "state at beginning of checkRunning" << endl;
+		print_state_running();
+		print_state_loosing();
 	}
 
-	if (candidates_loosers.size() == 0){
+	size_t mn = num_of_ballots;
+	size_t mx = 0;
+
+	// Check if there is a Winner > %50 votes
+	for (candidate c : candidates_running) {
+		if ((double) c.ballots.size() / num_of_ballots > .5) {
+			cout << c.name << endl;
+
+			if(debug && debug_check_running) {
+				cout << " found our winner: " << c.name << endl;
+				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
+			}
+			return true;
+		}
+		mn = min(mn, c.ballots.size());
+		mx = max(mx, c.ballots.size());
+	}
+
+
+	// check for tie
+	if (mn == mx && candidates_loosers.size() == 0) {
+		
+		if(debug && debug_check_running) {
+			cout << "found our winners: " << endl;
+		}
+
 		for (candidate c : candidates_running){
 			cout << c.name << endl;
+			if(debug && debug_check_running) {
+				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
+			}
 		}
+
 		return true;
 	}
-	if (debug && debug_check_running){
+
+	// otherwise move bottom tier to losers
+	for(int i = 0; i < (int) candidates_running.size() && candidates_loosers.size()==0; i++) {
+		candidate c = candidates_running[i];
+		if(c.ballots.size() == mn) {
+			// delete from running, add to losers
+			candidates_running.erase(candidates_running.begin()+i,candidates_running.begin()+i+1);
+			candidates_loosers.push_back(c);
+		}
+	}
+	// cout << "\n\n\nstate after some stuff" << endl;
+	// 	print_state_running();
+	// 	print_state_loosing();
+
+	if (debug && trace){
 		cout << "Leaving checkRunning()" << endl;
 	}
 	return false;
@@ -124,26 +156,68 @@ bool checkRunning(){
 // only consider those in the losers pool
 void eval() {
 
-	if (checkRunning()){
+	if(debug && trace) {
+		cout << "Entering eval()" << endl;
+	}
+
+	if(debug && debug_eval) {
+		cout << "\n\n\n\n\n\n\n\nlooking for a winner" << endl;
+	}
+
+	if (checkRunning()) {
 		return;
 	}
-	for (int i = 0; i < (int)candidates_loosers.size(); i++){
+
+	for (int i = 0; i < (int)candidates_loosers.size(); i++) {
+		
+		if(debug && debug_eval)
+			cout << "i: " << i << endl;
+
 		candidate* looser = &candidates_loosers[i];
 		for (deque<int> b : looser->ballots){
-			int i = b.front();
-			b.pop_front();
 
-			while(!b.empty() && (end(running_ids) != find(begin(running_ids), end(running_ids), i))){
-				i = b.front();
+			int value = b.front();
+			while(!b.empty()) {
+
+				// can find it
+				if(end(running_ids) != find(begin(running_ids), end(running_ids), value)) {
+					break;
+				}
+				value = b.front();
 				b.pop_front();
 			}
-			for (candidate runner : candidates_running){
-				if (runner.id == i){
+
+			for(size_t runner_index = 0; runner_index < candidates_running.size(); runner_index++) {
+
+				candidate &runner = candidates_running[runner_index];
+
+				// looking for a vote for a winner
+				if (runner.id == value) {
+					
+					if(debug && debug_eval) {
+						cout << "\n\nfound a new vote" << endl;
+						cout << "ballot size before pushing: " << runner.ballots.size() << endl;
+					}
+
 					runner.ballots.push_back(b);
+					
+					if(debug && debug_eval) {
+						cout << "ballot size after pushing: " << runner.ballots.size() << endl;
+						print_state_running();
+						print_state_loosing();
+					}
+
+					candidates_loosers.erase(candidates_loosers.begin()+i);
+					break;
 				}
-				candidates_loosers.erase(candidates_loosers.begin()+i);
 			}
 		}
+	}
+
+	eval();
+
+	if(debug && trace) {
+		cout << "Leaving eval()" << endl;
 	}
 
 }
@@ -154,7 +228,7 @@ void eval() {
 
 void parse_input(istream &input) {
 
-	if(debug && debug_parse_input) {
+	if(debug && trace) {
 		cout << "Entering parse_input()" << endl;
 	}
 
@@ -202,14 +276,14 @@ void parse_input(istream &input) {
 		//print_state();
 	}
 	//print_state();
-	if(debug && debug_parse_input) {
+	if(debug && trace) {
 		cout << "Leaving parse_input()" << endl;
 	}
 }
 
 
 void go(istream &input, ostream &o) {
-	if(debug && debug_go) {
+	if(debug && trace) {
 		cout << "Entering go" << endl;
 	}
 	string num_tests;
@@ -229,7 +303,7 @@ void go(istream &input, ostream &o) {
 		candidates_running.clear();
 
 	}
-	if(debug && debug_go) {
+	if(debug && trace) {
 		cout << "Leaving go()" << endl;
 	}
 }
