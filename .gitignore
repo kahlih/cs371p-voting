@@ -1,3 +1,6 @@
 RunVoting
 *.gcno
 *.tmp
+CornerCase.in
+Winner.in
+*.gcda

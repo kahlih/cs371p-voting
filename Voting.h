@@ -20,12 +20,14 @@ using namespace std;
 class candidate {
 
 	public:
-		candidate(string pname) {
+		candidate(string pname, int pid) {
 			name = pname;
+			id = pid;
 		}
 		candidate() {}
 		string name;
-		deque<deque<string>> ballots;
+		int id;
+		deque<deque<int>> ballots;
 
 		candidate operator=(candidate& rhs) {
 			
@@ -35,9 +37,30 @@ class candidate {
 			return *this;
 		}
 
+		const candidate& operator=(const candidate &c){
+			this->name = c.name;
+			this->ballots = c.ballots;
+			return *this;
+		}
+
+		void print_candidate(){
+			cout << this->name << endl;
+			cout << "ID: " << this->id << endl;
+			cout << "Ballots: " <<endl;
+			for (deque<int> b : this->ballots){
+				for (int s : b){
+					cout << s << " ";
+				}
+				cout << endl;
+			}
+			cout << endl;
+		}
 };
 
+void print_state_loosing();
+void print_state_running();
 void pre_eval();
+bool checkRunning();
 void eval();
 void parse_input(istream &input);
 void go(istream &input, ostream &o);
