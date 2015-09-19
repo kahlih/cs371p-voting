@@ -24,12 +24,12 @@ vector<int> running_ids;
 int num_of_ballots;
 
 bool debug = false;
-bool trace = false;
+bool trace = true;
 bool debug_parse_input = false;
 bool debug_pre_eval = false;
 bool debug_go = false;
-bool debug_check_running = true;
-bool debug_eval = true;
+bool debug_check_running = false;
+bool debug_eval = false;
 
 void print_state_running(){
 	cout << "candidates_running: " << endl;
@@ -128,7 +128,6 @@ bool checkRunning(){
 				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
 			}
 		}
-
 		return true;
 	}
 
@@ -168,14 +167,18 @@ void eval() {
 		return;
 	}
 
-	for (int i = 0; i < (int)candidates_loosers.size(); i++) {
+	// get each loser to count his vote
+	for (size_t i = 0; i < candidates_loosers.size(); i++) {
 		
 		if(debug && debug_eval)
 			cout << "i: " << i << endl;
 
 		candidate* looser = &candidates_loosers[i];
-		for (deque<int> b : looser->ballots){
 
+		// go through each ballot from the loser
+		for (deque<int> b : looser->ballots){
+			
+			// make sure the vote (value) is for a valid candidate
 			int value = b.front();
 			while(!b.empty()) {
 
@@ -187,11 +190,12 @@ void eval() {
 				b.pop_front();
 			}
 
+			// find the candidate being voted for
 			for(size_t runner_index = 0; runner_index < candidates_running.size(); runner_index++) {
 
 				candidate &runner = candidates_running[runner_index];
 
-				// looking for a vote for a winner
+				// is this the right candidate
 				if (runner.id == value) {
 					
 					if(debug && debug_eval) {
@@ -199,6 +203,7 @@ void eval() {
 						cout << "ballot size before pushing: " << runner.ballots.size() << endl;
 					}
 
+					// add the ballot to the found runner
 					runner.ballots.push_back(b);
 					
 					if(debug && debug_eval) {
@@ -206,12 +211,11 @@ void eval() {
 						print_state_running();
 						print_state_loosing();
 					}
-
-					candidates_loosers.erase(candidates_loosers.begin()+i);
 					break;
 				}
 			}
 		}
+		candidates_loosers.erase(candidates_loosers.begin()+i);
 	}
 
 	eval();
