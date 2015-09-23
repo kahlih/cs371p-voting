@@ -61,7 +61,7 @@ class candidate {
 void print_state_loosing();
 void print_state_running();
 void pre_eval();
-bool checkRunning();
-void eval();
+bool checkRunning(ostream &o);
+void eval(ostream &o);
 void parse_input(istream &input);
 void go(istream &input, ostream &o);

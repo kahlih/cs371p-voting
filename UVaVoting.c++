@@ -62,11 +62,10 @@ class candidate {
 void print_state_loosing();
 void print_state_running();
 void pre_eval();
-bool checkRunning();
-void eval();
+bool checkRunning(ostream &o);
+void eval(ostream &o);
 void parse_input(istream &input);
 void go(istream &input, ostream &o);
-
 
 vector<candidate> candidates_running;
 vector<candidate> candidates_loosers;
@@ -156,7 +155,7 @@ inline void pre_eval(){
 	}
 }
 
-bool checkRunning(){
+bool checkRunning(ostream &o){
 	if (debug && trace){
 		cout << "Entering checkRunning()" << endl;
 	}
@@ -173,8 +172,8 @@ bool checkRunning(){
 	// Check if there is a Winner > %50 votes
 	for (candidate c : candidates_running) {
 		if ((double) c.ballots.size() / num_of_ballots > .5) {
-			cout << c.name << endl;
-
+			//cout << c.name << endl;
+			o << c.name << endl;
 			if(debug && debug_check_running) {
 				cout << " found our winner: " << c.name << endl;
 				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
@@ -192,7 +191,8 @@ bool checkRunning(){
 		}
 
 		for (candidate c : candidates_running){
-			cout << c.name << endl;
+			//cout << c.name << endl;
+			o << c.name << endl;
 			if(debug && debug_check_running) {
 				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
 			}
@@ -225,7 +225,7 @@ bool checkRunning(){
 // evaluate from the second column onward
 // check if we found a winner at the beginning
 // only consider those in the losers pool
-void eval() {
+void eval(ostream &o) {
 
 	if(debug && trace) {
 		cout << "Entering eval()" << endl;
@@ -235,7 +235,7 @@ void eval() {
 		cout << "\n\n\n\nlooking for a winner\n\n" << endl;
 	}
 
-	if (checkRunning()) {
+	if (checkRunning(o)) {
 		return;
 	}
 
@@ -273,7 +273,7 @@ void eval() {
 		i--;
 	}
 
-	eval();
+	eval(o);
 
 	if(debug && trace) {
 		cout << "Leaving eval()" << endl;
@@ -358,21 +358,20 @@ void go(istream &input, ostream &o) {
 	for(int t = 0; t < tests; t++) {
 		parse_input(input);
 		pre_eval();
-		eval();
+		eval(o);
 		//print_state_running();
 		//print_state_loosing();
 		candidates_running.clear();
 		candidates_loosers.clear();
 		running_ids.clear();
 		if (t != tests-1)
-			cout << endl;
+			o << endl;
 
 	}
 	if(debug && trace) {
 		cout << "Leaving go()" << endl;
 	}
 }
-
 
 int main(){
 	go(cin,cout);

@@ -106,7 +106,7 @@ inline void pre_eval(){
 	}
 }
 
-bool checkRunning(){
+bool checkRunning(ostream &o){
 	if (debug && trace){
 		cout << "Entering checkRunning()" << endl;
 	}
@@ -123,8 +123,7 @@ bool checkRunning(){
 	// Check if there is a Winner > %50 votes
 	for (candidate c : candidates_running) {
 		if ((double) c.ballots.size() / num_of_ballots > .5) {
-			cout << c.name << endl;
-
+			o << c.name << endl;
 			if(debug && debug_check_running) {
 				cout << " found our winner: " << c.name << endl;
 				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
@@ -142,7 +141,7 @@ bool checkRunning(){
 		}
 
 		for (candidate c : candidates_running){
-			cout << c.name << endl;
+			o << c.name << endl;
 			if(debug && debug_check_running) {
 				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
 			}
@@ -175,7 +174,7 @@ bool checkRunning(){
 // evaluate from the second column onward
 // check if we found a winner at the beginning
 // only consider those in the losers pool
-void eval() {
+void eval(ostream &o) {
 
 	if(debug && trace) {
 		cout << "Entering eval()" << endl;
@@ -185,7 +184,7 @@ void eval() {
 		cout << "\n\n\n\nlooking for a winner\n\n" << endl;
 	}
 
-	if (checkRunning()) {
+	if (checkRunning(o)) {
 		return;
 	}
 
@@ -223,7 +222,7 @@ void eval() {
 		i--;
 	}
 
-	eval();
+	eval(o);
 
 	if(debug && trace) {
 		cout << "Leaving eval()" << endl;
@@ -245,10 +244,6 @@ void parse_input(istream &input) {
 	string num_candidates_str;
 	getline(input, num_candidates_str);
 	int num_candidates = atoi(num_candidates_str.c_str());
-
-	// allocate storage for candidates
-	//candidates_running.resize(num_candidates);
-	//candidates_loosers.resize(num_candidates);
 
 	// create candidates_running
 	for(int i = 0; i < num_candidates; i++) {
@@ -274,10 +269,6 @@ void parse_input(istream &input) {
 			dq.push_back(atoi(b.c_str()));
 
 		int index = dq.front()-1;
-		/*if (debug && debug_parse_input){
-			cout<< "Indexing at : " << index << endl;
-			print_state();
-		}*/
 		dq.pop_front();
 		candidates_running[index].ballots.push_back(dq);
 	}
@@ -286,7 +277,6 @@ void parse_input(istream &input) {
 		print_state_running();
 		print_state_loosing();
 	}
-	//print_state();
 	if(debug && trace) {
 		cout << "Leaving parse_input()" << endl;
 	}
@@ -308,14 +298,12 @@ void go(istream &input, ostream &o) {
 	for(int t = 0; t < tests; t++) {
 		parse_input(input);
 		pre_eval();
-		eval();
-		//print_state_running();
-		//print_state_loosing();
+		eval(o);
 		candidates_running.clear();
 		candidates_loosers.clear();
 		running_ids.clear();
 		if (t != tests-1)
-			cout << endl;
+			o << endl;
 
 	}
 	if(debug && trace) {
