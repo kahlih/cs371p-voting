@@ -85,6 +85,9 @@ Doxyfile:
 RunVoting: Voting.h Voting.c++ RunVoting.c++
 	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) Voting.c++ RunVoting.c++ -o RunVoting
 
+UVaVoting: UVaVoting.c++
+	$(CXX) $(CXXFLAGS) $(GCOVFLAGS) UVaVoting.c++ -o UVaVoting
+
 RunVoting.tmp: RunVoting
 	./RunVoting < RunVoting.in > RunVoting.tmp
 	diff RunVoting.tmp RunVoting.out

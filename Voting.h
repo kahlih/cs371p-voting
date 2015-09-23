@@ -20,13 +20,13 @@ using namespace std;
 class candidate {
 
 	public:
-		candidate(string pname, int pid) {
+		candidate(string pname, int pid){
 			name = pname;
 			id = pid;
 		}
-		candidate() {}
+		//candidate() {}
 		string name;
-		int id;
+		int id ;
 		deque<deque<int>> ballots;
 
 		candidate operator=(candidate& rhs) {
@@ -40,6 +40,7 @@ class candidate {
 		const candidate& operator=(const candidate &c){
 			this->name = c.name;
 			this->ballots = c.ballots;
+			this->id = c.id;
 			return *this;
 		}
 
