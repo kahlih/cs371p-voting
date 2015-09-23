@@ -1,0 +1,1028 @@
+        -:    0:Source:Voting.c++
+        -:    0:Graph:Voting.gcno
+        -:    0:Data:Voting.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:// ----------------------------
+        -:    2:// projects/voting/Voting.c++
+        -:    3:// Copyright (C) 2015
+        -:    4:// Glenn P. Downing
+        -:    5:// ----------------------------
+        -:    6:
+        -:    7:// --------
+        -:    8:// includes
+        -:    9:// --------
+        -:   10:#include <string>
+        -:   11:#include <vector>
+        -:   12:#include <iostream>
+        -:   13:#include <cstring>
+        -:   14:#include <sstream>
+        -:   15:#include <algorithm>
+        -:   16:#include <iterator>
+        -:   17:#include "Voting.h"
+        -:   18:
+        -:   19:using namespace std;
+        -:   20:
+        1:   21:vector<candidate> candidates_running;
+call    0 returned 100%
+call    1 returned 100%
+        1:   22:vector<candidate> candidates_loosers;
+call    0 returned 100%
+call    1 returned 100%
+        1:   23:vector<int> running_ids;
+call    0 returned 100%
+call    1 returned 100%
+        -:   24:int num_of_ballots;
+        -:   25:
+        -:   26:bool debug = false;
+        -:   27:bool trace = false;
+        -:   28:bool debug_parse_input = false;
+        -:   29:bool debug_pre_eval = false;
+        -:   30:bool debug_go = false;
+        -:   31:bool debug_check_running = true;
+        -:   32:bool debug_eval = true;
+        -:   33:
+function _Z19print_state_runningv called 0 returned 0% blocks executed 0%
+    #####:   34:void print_state_running(){
+    #####:   35:	cout << "candidates_running: " << endl;
+call    0 never executed
+call    1 never executed
+    #####:   36:	for (candidate c : candidates_running){
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+branch 10 never executed
+branch 11 never executed
+    #####:   37:		c.print_candidate();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   38:	}
+call    0 never executed
+call    1 never executed
+    #####:   39:}
+function _Z19print_state_loosingv called 0 returned 0% blocks executed 0%
+    #####:   40:void print_state_loosing(){
+    #####:   41:	cout << "candidates_loosers: " << endl;
+call    0 never executed
+call    1 never executed
+    #####:   42:	for (candidate c : candidates_loosers){
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+branch 10 never executed
+branch 11 never executed
+    #####:   43:		c.print_candidate();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   44:	}
+call    0 never executed
+call    1 never executed
+    #####:   45:}
+        -:   46:
+        -:   47:// analyze the first column
+function _Z8pre_evalv called 0 returned 0% blocks executed 0%
+    #####:   48:inline void pre_eval(){
+    #####:   49:	if (debug && trace){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:   50:		cout << "Entering Pre_Eval()" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:   51:	}
+        -:   52:
+    #####:   53:	size_t mn = num_of_ballots;
+    #####:   54:	size_t mx = 0;
+    #####:   55:	for (candidate c : candidates_running){
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+branch 10 never executed
+branch 11 never executed
+    #####:   56:		mn = min(c.ballots.size(),mn);
+call    0 never executed
+call    1 never executed
+    #####:   57:		mx = max(c.ballots.size(), mx);
+call    0 never executed
+call    1 never executed
+    #####:   58:	}
+call    0 never executed
+        -:   59:
+    #####:   60:	if (debug && debug_pre_eval){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:   61:		cout << "State upon Entering: " << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:   62:		print_state_running(); 
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   63:		print_state_loosing();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   64:		cout << "\n\nNow entinring for loop: " << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:   65:	}
+        -:   66:
+        -:   67:	// Moving candidates with tied for last into the looser pool
+        -:   68:	// Max sure they are not all winners (checking with mx!=mn)
+    #####:   69:	for(size_t i = 0; i <candidates_running.size() && (mx!=mn); i++) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+        -:   70:
+    #####:   71:		candidate c = candidates_running[i];
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+        -:   72:
+    #####:   73:		if (debug && debug_pre_eval){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:   74:			cout << "Viewing Candidate at " << i << " position: " << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    #####:   75:			c.print_candidate();			
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   76:		}
+        -:   77:
+    #####:   78:		if (c.ballots.size() == mn){
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   79:			if (debug && debug_pre_eval){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:   80:				cout << "Before Removal State: " << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:   81:				print_state_running();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   82:				print_state_loosing();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   83:				cout << "\n" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:   84:				cout << "Removing candidate at " << i << " position: " << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+    #####:   85:				c.print_candidate();			
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   86:			}
+    #####:   87:			candidates_loosers.push_back(c);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   88:			candidates_running.erase(candidates_running.begin()+i);
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    #####:   89:			i--;
+    #####:   90:			if (debug && debug_pre_eval){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:   91:				cout << "After Removal, new state: " << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:   92:				print_state_running();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   93:				print_state_loosing();			
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   94:			}
+        -:   95:		}
+        -:   96:		else {
+    #####:   97:			running_ids.push_back(c.id);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   98:		}
+    #####:   99:	}
+call    0 never executed
+call    1 never executed
+    #####:  100:	if (debug && debug_pre_eval){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  101:		print_state_running();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  102:		print_state_loosing();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  103:	}
+    #####:  104:	if (debug && trace){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  105:		cout << "Leaving Pre_Eval()" << endl;	
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  106:	}
+    #####:  107:}
+        -:  108:
+function _Z12checkRunningv called 0 returned 0% blocks executed 0%
+    #####:  109:bool checkRunning(){
+    #####:  110:	if (debug && trace){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  111:		cout << "Entering checkRunning()" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  112:	}
+        -:  113:
+    #####:  114:	if(debug && debug_check_running) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  115:		cout << "state at beginning of checkRunning" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  116:		print_state_running();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  117:		print_state_loosing();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  118:	}
+        -:  119:
+    #####:  120:	size_t mn = num_of_ballots;
+    #####:  121:	size_t mx = 0;
+        -:  122:
+        -:  123:	// Check if there is a Winner > %50 votes
+    #####:  124:	for (candidate c : candidates_running) {
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+branch 10 never executed
+branch 11 never executed
+    #####:  125:		if ((double) c.ballots.size() / num_of_ballots > .5) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  126:			cout << c.name << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  127:
+    #####:  128:			if(debug && debug_check_running) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  129:				cout << " found our winner: " << c.name << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    #####:  130:				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+        -:  131:			}
+    #####:  132:			return true;
+        -:  133:		}
+    #####:  134:		mn = min(mn, c.ballots.size());
+call    0 never executed
+call    1 never executed
+    #####:  135:		mx = max(mx, c.ballots.size());
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    #####:  136:	}
+call    0 never executed
+        -:  137:	// check for tie
+    #####:  138:	if (mn == mx && candidates_loosers.size() == 0) {
+branch  0 never executed
+branch  1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+        -:  139:		
+    #####:  140:		if(debug && debug_check_running) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  141:			cout << "found our winners: " << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  142:		}
+        -:  143:
+    #####:  144:		for (candidate c : candidates_running){
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+branch 10 never executed
+branch 11 never executed
+    #####:  145:			cout << c.name << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  146:			if(debug && debug_check_running) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  147:				cout << " with " << (double)c.ballots.size() / num_of_ballots << " of the vote" << endl;
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+call   10 never executed
+branch 11 never executed
+branch 12 never executed
+        -:  148:			}
+    #####:  149:		}
+call    0 never executed
+call    1 never executed
+        -:  150:
+    #####:  151:		return true;
+        -:  152:	}
+        -:  153:
+        -:  154:	// otherwise move bottom tier to losers
+    #####:  155:	if (candidates_loosers.size()==0){
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  156:		for(int i = 0; i < (int) candidates_running.size(); i++) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  157:			candidate c = candidates_running[i];
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  158:			if(c.ballots.size() == mn) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  159:				// delete from running, add to losers
+        -:  160:
+    #####:  161:				candidates_running.erase(candidates_running.begin()+i);
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    #####:  162:				candidates_loosers.push_back(c);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  163:				running_ids.erase(running_ids.begin()+i);
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    #####:  164:				i--;
+        -:  165:			}
+    #####:  166:		}
+call    0 never executed
+call    1 never executed
+        -:  167:	}
+        -:  168:
+    #####:  169:	if (debug && trace){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  170:		cout << "Leaving checkRunning()" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  171:	}
+    #####:  172:	return false;
+        -:  173:}
+        -:  174:
+        -:  175:// evaluate from the second column onward
+        -:  176:// check if we found a winner at the beginning
+        -:  177:// only consider those in the losers pool
+function _Z4evalv called 0 returned 0% blocks executed 0%
+    #####:  178:void eval() {
+        -:  179:
+    #####:  180:	if(debug && trace) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  181:		cout << "Entering eval()" << endl;
+call    0 never executed
+call    1 never executed
+        -:  182:	}
+        -:  183:
+    #####:  184:	if(debug && debug_eval) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  185:		cout << "\n\n\n\nlooking for a winner\n\n" << endl;
+call    0 never executed
+call    1 never executed
+        -:  186:	}
+        -:  187:
+    #####:  188:	if (checkRunning()) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  189:		return;
+        -:  190:	}
+        -:  191:
+    #####:  192:	for (int i = 0; i < (int)candidates_loosers.size(); i++) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  193:		
+    #####:  194:		candidate* looser = &candidates_loosers[i];
+call    0 never executed
+    #####:  195:		for (deque<int> b : looser->ballots){
+call    0 never executed
+call    1 never executed
+call    2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+branch 12 never executed
+branch 13 never executed
+        -:  196:
+        -:  197:			int value;
+    #####:  198:			while(!b.empty()) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  199:				// can find it
+    #####:  200:				value = b.front();
+call    0 never executed
+    #####:  201:				b.pop_front();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  202:				if(end(running_ids) != find(begin(running_ids), end(running_ids), value)) {
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+call    5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+branch  9 never executed
+branch 10 never executed
+    #####:  203:					break;
+        -:  204:				}
+        -:  205:			}
+    #####:  206:			for(size_t runner_index = 0; runner_index < candidates_running.size(); runner_index++) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  207:
+    #####:  208:				candidate &runner = candidates_running[runner_index];
+call    0 never executed
+        -:  209:				// looking for a vote for a winner
+    #####:  210:				if (runner.id == value) {
+branch  0 never executed
+branch  1 never executed
+    #####:  211:					runner.ballots.push_back(b);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  212:					
+    #####:  213:					if(debug && debug_eval) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  214:						cout << "ballot size after pushing: " << runner.ballots.size() << endl;
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+call    7 never executed
+branch  8 never executed
+branch  9 never executed
+    #####:  215:						print_state_running();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  216:						print_state_loosing();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  217:					}
+    #####:  218:					break;
+        -:  219:				}
+        -:  220:			}
+    #####:  221:		}
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:  222:		candidates_loosers.erase(candidates_loosers.begin()+i);
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    #####:  223:		i--;
+        -:  224:	}
+        -:  225:
+    #####:  226:	eval();
+call    0 never executed
+        -:  227:
+    #####:  228:	if(debug && trace) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  229:		cout << "Leaving eval()" << endl;
+call    0 never executed
+call    1 never executed
+        -:  230:	}
+        -:  231:
+        -:  232:}
+        -:  233:
+        -:  234:// ------------
+        -:  235:// parse_input
+        -:  236:// ------------
+        -:  237:
+function _Z11parse_inputRSi called 0 returned 0% blocks executed 0%
+    #####:  238:void parse_input(istream &input) {
+        -:  239:
+    #####:  240:	if(debug && trace) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  241:		cout << "Entering parse_input()" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  242:	}
+        -:  243:
+        -:  244:	// get number of candidates
+    #####:  245:	string num_candidates_str;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  246:	getline(input, num_candidates_str);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  247:	int num_candidates = atoi(num_candidates_str.c_str());
+call    0 never executed
+call    1 never executed
+        -:  248:
+        -:  249:	// allocate storage for candidates
+        -:  250:	//candidates_running.resize(num_candidates);
+        -:  251:	//candidates_loosers.resize(num_candidates);
+        -:  252:
+        -:  253:	// create candidates_running
+    #####:  254:	for(int i = 0; i < num_candidates; i++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  255:		string name;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  256:		getline(input, name);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  257:
+    #####:  258:		candidate curr_cand(name, i+1);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+call    6 never executed
+call    7 never executed
+call    8 never executed
+    #####:  259:		candidates_running.push_back(curr_cand);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  260:	}
+call    0 never executed
+call    1 never executed
+    #####:  261:	if (debug && debug_parse_input){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  262:		cout<< "Printing state before inputing ballots" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  263:		print_state_running();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  264:		print_state_loosing();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  265:	}
+        -:  266:	// read ballots
+    #####:  267:	string ballot_line;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+call    4 never executed
+    #####:  268:	while(getline(input,ballot_line) && strcmp(ballot_line.c_str(), "") != 0) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+branch  7 never executed
+call    8 never executed
+branch  9 never executed
+branch 10 never executed
+branch 11 never executed
+branch 12 never executed
+    #####:  269:		deque<int> dq;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  270:		++num_of_ballots;
+    #####:  271:		string b;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+call    4 never executed
+    #####:  272:		stringstream stream(ballot_line);
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+call    5 never executed
+    #####:  273:		while (getline(stream, b, ' '))
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+branch  7 never executed
+    #####:  274:			dq.push_back(atoi(b.c_str()));
+call    0 never executed
+call    1 never executed
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+        -:  275:
+    #####:  276:		int index = dq.front()-1;
+call    0 never executed
+        -:  277:		/*if (debug && debug_parse_input){
+        -:  278:			cout<< "Indexing at : " << index << endl;
+        -:  279:			print_state();
+        -:  280:		}*/
+    #####:  281:		dq.pop_front();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  282:		candidates_running[index].ballots.push_back(dq);
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  283:	}
+call    0 never executed
+call    1 never executed
+    #####:  284:	if (debug && debug_parse_input){
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  285:		cout<< "Printing state after inputing ballots" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  286:		print_state_running();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  287:		print_state_loosing();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  288:	}
+        -:  289:	//print_state();
+    #####:  290:	if(debug && trace) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  291:		cout << "Leaving parse_input()" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  292:	}
+call    0 never executed
+call    1 never executed
+    #####:  293:}
+call    0 never executed
+        -:  294:
+        -:  295:
+function _Z2goRSiRSo called 0 returned 0% blocks executed 0%
+    #####:  296:void go(istream &input, ostream &o) {
+    #####:  297:	if(debug && trace) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  298:		cout << "Entering go" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+        -:  299:	}
+    #####:  300:	string num_tests;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  301:	getline(input, num_tests); // 2
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  302:
+    #####:  303:	string dummy;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+call    4 never executed
+    #####:  304:	getline(input, dummy);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  305:
+    #####:  306:	int tests = atoi(num_tests.c_str());
+call    0 never executed
+call    1 never executed
+        -:  307:	// test cases
+    #####:  308:	for(int t = 0; t < tests; t++) {
+branch  0 never executed
+branch  1 never executed
+    #####:  309:		parse_input(input);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  310:		pre_eval();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  311:		eval();
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  312:		//print_state_running();
+        -:  313:		//print_state_loosing();
+    #####:  314:		candidates_running.clear();
+call    0 never executed
+    #####:  315:		candidates_loosers.clear();
+call    0 never executed
+    #####:  316:		running_ids.clear();
+call    0 never executed
+    #####:  317:		if (t != tests-1)
+branch  0 never executed
+branch  1 never executed
+    #####:  318:			cout << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  319:
+        -:  320:	}
+    #####:  321:	if(debug && trace) {
+branch  0 never executed
+branch  1 never executed
+branch  2 never executed
+branch  3 never executed
+    #####:  322:		cout << "Leaving go()" << endl;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:  323:	}
+call    0 never executed
+call    1 never executed
+function _GLOBAL__sub_I_candidates_running called 1 returned 100% blocks executed 100%
+function _Z41__static_initialization_and_destruction_0ii called 1 returned 100% blocks executed 100%
+        3:  324:}
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0%

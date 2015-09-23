@@ -1,0 +1,88 @@
+        -:    0:Source:TestVoting.c++
+        -:    0:Graph:TestVoting.gcno
+        -:    0:Data:TestVoting.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:
+        -:    2:#include <iostream> // cout, endl
+        -:    3:#include <sstream>  // istringtstream, ostringstream
+        -:    4:#include <string>   // string
+        -:    5:#include <utility>  // pair
+        -:    6:
+        -:    7:#include "gtest/gtest.h"
+        -:    8:
+        -:    9:#include "Voting.h"
+        -:   10:
+        -:   11:using namespace std;
+        -:   12:
+        -:   13:// -----------
+        -:   14:// TestCollatz
+        -:   15:// -----------
+        -:   16:
+        -:   17:// ----
+        -:   18:// read
+        -:   19:// ----
+        -:   20:
+function _ZN26Voting_Fixture_read_1_TestD0Ev called 1 returned 100% blocks executed 100%
+function _ZN26Voting_Fixture_read_1_TestD2Ev called 1 returned 100% blocks executed 75%
+function _ZN26Voting_Fixture_read_1_Test8TestBodyEv called 1 returned 100% blocks executed 44%
+function _ZN26Voting_Fixture_read_1_TestC2Ev called 1 returned 100% blocks executed 100%
+        5:   21:TEST(Voting_Fixture, read_1) {
+call    0 returned 100%
+call    1 returned 100%
+call    2 returned 100%
+call    3 returned 100%
+call    4 returned 100%
+call    5 returned 100%
+call    6 returned 100%
+branch  7 taken 0% (fallthrough)
+branch  8 taken 100%
+call    9 never executed
+call   10 returned 100%
+        1:   22:    string s("3\n\n3\nJohn Doe\nJane Smith\nSirhan Sirhan\n1 2 3\n2 1 3\n2 3 1\n1 2 3\n3 1 2\n\n3\nJon\nJane\nBob\n1 2 3\n2 3 1\n3 2 1\n3 1 2\n2 3 1\n1 2 3\n\n4\nA\nB\nC\nD\n1 2 3 4\n1 2 3 4\n1 2 3 4\n2 1 3 4\n2 1 3 4\n2 1 3 4\n3 1 2 4\n3 1 2 4\n4 2 1 3\n");
+call    0 returned 100%
+call    1 returned 100%
+branch  2 taken 100% (fallthrough)
+branch  3 taken 0% (throw)
+call    4 returned 100%
+        -:   23:    //= go(s);
+        1:   24:    ASSERT_EQ( 1, 1);
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0% (throw)
+call    3 returned 100%
+branch  4 taken 0% (fallthrough)
+branch  5 taken 100%
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+call    9 never executed
+branch 10 never executed
+branch 11 never executed
+call   12 never executed
+branch 13 never executed
+branch 14 never executed
+call   15 never executed
+branch 16 never executed
+branch 17 never executed
+call   18 never executed
+call   19 never executed
+call   20 returned 100%
+branch 21 taken 100%
+branch 22 taken 0%
+call   23 returned 100%
+branch 24 taken 100%
+branch 25 taken 0%
+call   26 never executed
+call   27 never executed
+call   28 never executed
+call   29 never executed
+call   30 never executed
+function _GLOBAL__sub_I__ZN26Voting_Fixture_read_1_Test10test_info_E called 1 returned 100% blocks executed 100%
+function _Z41__static_initialization_and_destruction_0ii called 1 returned 100% blocks executed 100%
+        3:   25:}
+call    0 returned 100%
+branch  1 taken 100% (fallthrough)
+branch  2 taken 0%
+branch  3 taken 100% (fallthrough)
+branch  4 taken 0%
