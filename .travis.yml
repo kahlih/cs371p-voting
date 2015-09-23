@@ -39,11 +39,11 @@ before_script:
 script:
     - date
     - ls -al
-    - make collatz-tests
+    - make voting-tests
     - ls -al
     - make html
     - ls -al
-    - make Collatz.log
+    - make Voting.log
     - ls -al
     - make test
     - ls -al
