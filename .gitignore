@@ -8,3 +8,5 @@ Tie.in
 other.in
 Voting-tests
 *.swp
+*.gcov
+TestVoting
