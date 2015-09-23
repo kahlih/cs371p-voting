@@ -1,9 +1,9 @@
 FILES :=                              \
     .travis.yml                       \
-    Voting-tests/srs3742-RunVoting.in   \
-    Voting-tests/srs3742-RunVoting.out  \
-    Voting-tests/srs3742-TestVoting.c++ \
-    Voting-tests/srs3742-TestVoting.out \
+    Voting-tests/kh27624-RunVoting.in   \
+    Voting-tests/kh27624-RunVoting.out  \
+    Voting-tests/kh27624-TestVoting.c++ \
+    Voting-tests/kh27624-TestVoting.out \
     Voting.c++                       \
     Voting.h                         \
     Voting.log                       \
