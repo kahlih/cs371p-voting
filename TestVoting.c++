@@ -10,15 +10,20 @@
 
 using namespace std;
 
-// -----------
-// TestCollatz
-// -----------
 
-// ----
-// read
-// ----
+/* ************ */
+/* parse_input */
+/* ************ */
+
+TEST(Voting_Fixture_parse, parse_input_1){
+    
+}
 
 
+
+/* ************ */
+/* go */
+/* ************ */
 
 /* Multiple Tests */
 TEST(Voting_Fixture_go, go_1) {
