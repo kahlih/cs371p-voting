@@ -70,7 +70,7 @@ status:
 
 test: RunVoting.tmp TestVoting.tmp
 
-Voting-tests:
+voting-tests:
 	git clone https://github.com/cs371p-fall-2015/Voting-tests.git
 
 html: Doxyfile Voting.h Voting.c++ RunVoting.c++ TestVoting.c++
