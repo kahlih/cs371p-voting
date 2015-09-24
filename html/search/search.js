@@ -7,14 +7,22 @@
 
 var indexSectionsWithContent =
 {
-  0: "c",
-  1: "c"
+  0: "bcegimnoprtuv",
+  1: "c",
+  2: "rtuv",
+  3: "cegmopt",
+  4: "bin",
+  5: "v"
 };
 
 var indexSectionNames =
 {
   0: "all",
-  1: "classes"
+  1: "classes",
+  2: "files",
+  3: "functions",
+  4: "variables",
+  5: "pages"
 };
 
 function convertToId(search)

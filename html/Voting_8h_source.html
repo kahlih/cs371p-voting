@@ -60,6 +60,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow2" class="tabs2">
     <ul class="tablist">
       <li><a href="files.html"><span>File&#160;List</span></a></li>
+      <li><a href="globals.html"><span>File&#160;Members</span></a></li>
     </ul>
   </div>
 </div><!-- top -->
@@ -68,7 +69,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Variables</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Pages</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -82,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">Voting.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// --------------------------</span></div>
+<a href="Voting_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// --------------------------</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// projects/voting/Voting.h</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">// Copyright (C) 2015</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// Glenn P. Downing</span></div>
@@ -96,64 +97,80 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">// includes</span></div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment">// --------</span></div>
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;deque&gt;</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span> </div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">using namespace </span>std;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="keyword">class </span><a class="code" href="classcandidate.html">candidate</a> {</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keyword">using namespace </span>std;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        <a class="code" href="classcandidate.html">candidate</a>(<span class="keywordtype">string</span> pname, <span class="keywordtype">int</span> pid){</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;            name = pname;</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;            <span class="keywordtype">id</span> = pid;</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        }</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        <span class="comment">//candidate() {}</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordtype">string</span> name;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        <span class="keywordtype">int</span> id ;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        deque&lt;deque&lt;int&gt;&gt; ballots;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        <a class="code" href="classcandidate.html">candidate</a> operator=(<a class="code" href="classcandidate.html">candidate</a>&amp; rhs) {</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;            </div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            this-&gt;name = rhs.name;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            this-&gt;ballots = rhs.ballots;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        }</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        <span class="keyword">const</span> <a class="code" href="classcandidate.html">candidate</a>&amp; operator=(<span class="keyword">const</span> <a class="code" href="classcandidate.html">candidate</a> &amp;c){</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            this-&gt;name = c.name;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            this-&gt;ballots = c.ballots;</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            this-&gt;<span class="keywordtype">id</span> = c.id;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        }</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        <span class="keywordtype">void</span> print_candidate(){</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            cout &lt;&lt; this-&gt;name &lt;&lt; endl;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;ID: &quot;</span> &lt;&lt; this-&gt;<span class="keywordtype">id</span> &lt;&lt; endl;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;Ballots: &quot;</span> &lt;&lt;endl;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            <span class="keywordflow">for</span> (deque&lt;int&gt; b : this-&gt;ballots){</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s : b){</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                    cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                cout &lt;&lt; endl;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            }</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            cout &lt;&lt; endl;</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;        }</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordtype">void</span> print_state_loosing();</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordtype">void</span> print_state_running();</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="keywordtype">void</span> pre_eval();</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keywordtype">bool</span> checkRunning();</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordtype">void</span> eval();</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordtype">void</span> parse_input(istream &amp;input);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">void</span> go(istream &amp;input, ostream &amp;o);</div>
-<div class="ttc" id="classcandidate_html"><div class="ttname"><a href="classcandidate.html">candidate</a></div><div class="ttdef"><b>Definition:</b> UVaVoting.c++:21</div></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keyword">class </span><a class="code" href="classcandidate.html">candidate</a> {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classcandidate.html#acdc5859c6303e8b1eaa65d0154887c65">   29</a></span>&#160;        <a class="code" href="classcandidate.html#acdc5859c6303e8b1eaa65d0154887c65">candidate</a>(<span class="keywordtype">string</span> pname, <span class="keywordtype">int</span> pid) {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;            name = pname;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;            <span class="keywordtype">id</span> = pid;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;        }</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        <span class="comment">//candidate() {}</span></div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;        <span class="keywordtype">string</span> name;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        <span class="keywordtype">int</span> id ;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        deque&lt;deque&lt;int&gt;&gt; ballots;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="classcandidate.html#a1af1730b4f2e6a3b1947bbd1c5e5c094">   38</a></span>&#160;        <a class="code" href="classcandidate.html">candidate</a> <a class="code" href="classcandidate.html#a1af1730b4f2e6a3b1947bbd1c5e5c094">operator=</a>(<a class="code" href="classcandidate.html">candidate</a>&amp; rhs) {</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;            </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;            this-&gt;name = rhs.<a class="code" href="classcandidate.html#a1f1b1e89d8b9eb46fb434fbda193f15d">name</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;            this-&gt;ballots = rhs.<a class="code" href="classcandidate.html#a925678448c6bcc5d3ba71569099afb00">ballots</a>;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;        }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="classcandidate.html#a436ceedf485a23d3c88edbac10fd8f65">   46</a></span>&#160;        <span class="keyword">const</span> <a class="code" href="classcandidate.html">candidate</a>&amp; <a class="code" href="classcandidate.html#a436ceedf485a23d3c88edbac10fd8f65">operator=</a>(<span class="keyword">const</span> <a class="code" href="classcandidate.html">candidate</a> &amp;c) {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            this-&gt;name = c.<a class="code" href="classcandidate.html#a1f1b1e89d8b9eb46fb434fbda193f15d">name</a>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;            this-&gt;ballots = c.<a class="code" href="classcandidate.html#a925678448c6bcc5d3ba71569099afb00">ballots</a>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            this-&gt;<span class="keywordtype">id</span> = c.<a class="code" href="classcandidate.html#aa4d4295af21c1e74fde9e103271e7cde">id</a>;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            <span class="keywordflow">return</span> *<span class="keyword">this</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classcandidate.html#a2e3fe36070679f88542cc1cbc4a1a1bd">   53</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classcandidate.html#a2e3fe36070679f88542cc1cbc4a1a1bd">print_candidate</a>() {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            cout &lt;&lt; this-&gt;name &lt;&lt; endl;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;ID: &quot;</span> &lt;&lt; this-&gt;<span class="keywordtype">id</span> &lt;&lt; endl;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            cout &lt;&lt; <span class="stringliteral">&quot;Ballots: &quot;</span> &lt;&lt;endl;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keywordflow">for</span> (deque&lt;int&gt; b : this-&gt;ballots) {</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> s : b) {</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;                    cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot; &quot;</span>;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;                }</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                cout &lt;&lt; endl;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;            }</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            cout &lt;&lt; endl;</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        }</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;};</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keywordtype">void</span> <a class="code" href="Voting_8h.html#ad79946fd82cde82dee8787630686b33d">print_state_loosing</a>(vector&lt;candidate&gt; &amp;candidates_loosing);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;<span class="keywordtype">void</span> <a class="code" href="Voting_8h.html#a4b4998d94433fb40fa8af618230fe638">print_state_running</a>(vector&lt;candidate&gt; &amp;candidates_running);</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordtype">void</span> <a class="code" href="Voting_8h.html#a8a7f560a8cd57d9bd6536a829943f9c0">pre_eval</a>(vector&lt;candidate&gt; &amp;candidates_running, vector&lt;candidate&gt; &amp;candidates_loosing, vector&lt;int&gt; &amp;running_ids);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="Voting_8h.html#a5a44358626507312e91ec4bd767d74c9">check_running</a>(ostream &amp;o, vector&lt;candidate&gt; &amp;candidates_running, vector&lt;candidate&gt; &amp;candidates_loosing, vector&lt;int&gt; &amp;running_ids);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">void</span> <a class="code" href="Voting_8h.html#ab39aeba1ab637843b2bdc2e21f16348d">eval</a>(ostream &amp;o, vector&lt;candidate&gt; &amp;candidates_running, vector&lt;candidate&gt; &amp;candidates_loosing, vector&lt;int&gt; &amp;running_ids);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordtype">void</span> <a class="code" href="Voting_8h.html#a0de3afd15c6b7ea2a12b3455b224f56e">parse_input</a>(istream &amp;input, vector&lt;candidate&gt; &amp;candidates_running);</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="keywordtype">void</span> <a class="code" href="Voting_8h.html#a909712a187183d0648ea5902f8bd6a1f">go</a>(istream &amp;input, ostream &amp;o);</div>
+<div class="ttc" id="Voting_8h_html_a8a7f560a8cd57d9bd6536a829943f9c0"><div class="ttname"><a href="Voting_8h.html#a8a7f560a8cd57d9bd6536a829943f9c0">pre_eval</a></div><div class="ttdeci">void pre_eval(vector&lt; candidate &gt; &amp;candidates_running, vector&lt; candidate &gt; &amp;candidates_loosing, vector&lt; int &gt; &amp;running_ids)</div><div class="ttdef"><b>Definition:</b> UVaVoting.c++:74</div></div>
+<div class="ttc" id="Voting_8h_html_ab39aeba1ab637843b2bdc2e21f16348d"><div class="ttname"><a href="Voting_8h.html#ab39aeba1ab637843b2bdc2e21f16348d">eval</a></div><div class="ttdeci">void eval(ostream &amp;o, vector&lt; candidate &gt; &amp;candidates_running, vector&lt; candidate &gt; &amp;candidates_loosing, vector&lt; int &gt; &amp;running_ids)</div><div class="ttdef"><b>Definition:</b> UVaVoting.c++:150</div></div>
+<div class="ttc" id="classcandidate_html_a925678448c6bcc5d3ba71569099afb00"><div class="ttname"><a href="classcandidate.html#a925678448c6bcc5d3ba71569099afb00">candidate::ballots</a></div><div class="ttdeci">deque&lt; deque&lt; int &gt; &gt; ballots</div><div class="ttdef"><b>Definition:</b> UVaVoting.c++:32</div></div>
+<div class="ttc" id="classcandidate_html_aa4d4295af21c1e74fde9e103271e7cde"><div class="ttname"><a href="classcandidate.html#aa4d4295af21c1e74fde9e103271e7cde">candidate::id</a></div><div class="ttdeci">int id</div><div class="ttdef"><b>Definition:</b> UVaVoting.c++:31</div></div>
+<div class="ttc" id="classcandidate_html_a436ceedf485a23d3c88edbac10fd8f65"><div class="ttname"><a href="classcandidate.html#a436ceedf485a23d3c88edbac10fd8f65">candidate::operator=</a></div><div class="ttdeci">const candidate &amp; operator=(const candidate &amp;c)</div><div class="ttdef"><b>Definition:</b> Voting.h:46</div></div>
+<div class="ttc" id="Voting_8h_html_a0de3afd15c6b7ea2a12b3455b224f56e"><div class="ttname"><a href="Voting_8h.html#a0de3afd15c6b7ea2a12b3455b224f56e">parse_input</a></div><div class="ttdeci">void parse_input(istream &amp;input, vector&lt; candidate &gt; &amp;candidates_running)</div><div class="ttdef"><b>Definition:</b> UVaVoting.c++:197</div></div>
+<div class="ttc" id="classcandidate_html"><div class="ttname"><a href="classcandidate.html">candidate</a></div><div class="ttdef"><b>Definition:</b> UVaVoting.c++:22</div></div>
+<div class="ttc" id="Voting_8h_html_a909712a187183d0648ea5902f8bd6a1f"><div class="ttname"><a href="Voting_8h.html#a909712a187183d0648ea5902f8bd6a1f">go</a></div><div class="ttdeci">void go(istream &amp;input, ostream &amp;o)</div><div class="ttdef"><b>Definition:</b> UVaVoting.c++:229</div></div>
+<div class="ttc" id="classcandidate_html_a1f1b1e89d8b9eb46fb434fbda193f15d"><div class="ttname"><a href="classcandidate.html#a1f1b1e89d8b9eb46fb434fbda193f15d">candidate::name</a></div><div class="ttdeci">string name</div><div class="ttdef"><b>Definition:</b> UVaVoting.c++:30</div></div>
+<div class="ttc" id="classcandidate_html_a1af1730b4f2e6a3b1947bbd1c5e5c094"><div class="ttname"><a href="classcandidate.html#a1af1730b4f2e6a3b1947bbd1c5e5c094">candidate::operator=</a></div><div class="ttdeci">candidate operator=(candidate &amp;rhs)</div><div class="ttdef"><b>Definition:</b> Voting.h:38</div></div>
+<div class="ttc" id="Voting_8h_html_ad79946fd82cde82dee8787630686b33d"><div class="ttname"><a href="Voting_8h.html#ad79946fd82cde82dee8787630686b33d">print_state_loosing</a></div><div class="ttdeci">void print_state_loosing(vector&lt; candidate &gt; &amp;candidates_loosing)</div></div>
+<div class="ttc" id="Voting_8h_html_a5a44358626507312e91ec4bd767d74c9"><div class="ttname"><a href="Voting_8h.html#a5a44358626507312e91ec4bd767d74c9">check_running</a></div><div class="ttdeci">bool check_running(ostream &amp;o, vector&lt; candidate &gt; &amp;candidates_running, vector&lt; candidate &gt; &amp;candidates_loosing, vector&lt; int &gt; &amp;running_ids)</div><div class="ttdef"><b>Definition:</b> UVaVoting.c++:101</div></div>
+<div class="ttc" id="classcandidate_html_acdc5859c6303e8b1eaa65d0154887c65"><div class="ttname"><a href="classcandidate.html#acdc5859c6303e8b1eaa65d0154887c65">candidate::candidate</a></div><div class="ttdeci">candidate(string pname, int pid)</div><div class="ttdef"><b>Definition:</b> Voting.h:29</div></div>
+<div class="ttc" id="Voting_8h_html_a4b4998d94433fb40fa8af618230fe638"><div class="ttname"><a href="Voting_8h.html#a4b4998d94433fb40fa8af618230fe638">print_state_running</a></div><div class="ttdeci">void print_state_running(vector&lt; candidate &gt; &amp;candidates_running)</div></div>
+<div class="ttc" id="classcandidate_html_a2e3fe36070679f88542cc1cbc4a1a1bd"><div class="ttname"><a href="classcandidate.html#a2e3fe36070679f88542cc1cbc4a1a1bd">candidate::print_candidate</a></div><div class="ttdeci">void print_candidate()</div><div class="ttdef"><b>Definition:</b> Voting.h:53</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Sep 22 2015 21:40:09 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Thu Sep 24 2015 12:54:30 for My Project by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.6
 </small></address>

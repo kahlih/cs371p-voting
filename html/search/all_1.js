@@ -1,0 +1,5 @@
+var searchData=
+[
+  ['candidate',['candidate',['../classcandidate.html',1,'candidate'],['../classcandidate.html#acdc5859c6303e8b1eaa65d0154887c65',1,'candidate::candidate(string pname, int pid)'],['../classcandidate.html#acdc5859c6303e8b1eaa65d0154887c65',1,'candidate::candidate(string pname, int pid)']]],
+  ['check_5frunning',['check_running',['../UVaVoting_8c_09_09.html#a5a44358626507312e91ec4bd767d74c9',1,'check_running(ostream &amp;o, vector&lt; candidate &gt; &amp;candidates_running, vector&lt; candidate &gt; &amp;candidates_loosing, vector&lt; int &gt; &amp;running_ids):&#160;UVaVoting.c++'],['../Voting_8c_09_09.html#ac5bbf3572b2cefae84ab149299341770',1,'check_running(ostream &amp;o, vector&lt; candidate &gt; &amp;candidates_running, vector&lt; candidate &gt; &amp;candidates_loosers, vector&lt; int &gt; &amp;running_ids):&#160;Voting.c++'],['../Voting_8h.html#a5a44358626507312e91ec4bd767d74c9',1,'check_running(ostream &amp;o, vector&lt; candidate &gt; &amp;candidates_running, vector&lt; candidate &gt; &amp;candidates_loosing, vector&lt; int &gt; &amp;running_ids):&#160;UVaVoting.c++']]]
+];

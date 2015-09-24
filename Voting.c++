@@ -20,6 +20,20 @@ using namespace std;
 
 int num_of_ballots;
 
+/**
+ * \mainpage Voting
+ * This program implements the Australian Voting system.
+ * 
+ * If there is a candidate with > 50% of the votes, he is the winner. 
+ * Else, looser pool ballots are considered until a candidate reaches the > 50% mark 
+ */
+
+
+ /**
+  * Pre Eval handles the first pass of ballots only.
+  * It redistributes the candidates in the running pool to the candidates in the loosing pool (if need be).
+  * Pre Eval is only called once after parse input, and is never called again.
+  */
 // analyze the first column
 inline void pre_eval(vector<candidate> &candidates_running, vector<candidate> &candidates_loosers, vector<int> &running_ids) {
 
@@ -47,7 +61,10 @@ inline void pre_eval(vector<candidate> &candidates_running, vector<candidate> &c
 		else running_ids.push_back(c.id);
 	}
 }
-
+/**
+ * check_running is where we verify we have a winner or someone tied for the winning position.
+ * It outputs to the ostream, o, and returns a boolean to signify that we now need to exit the program.
+ */
 bool check_running(ostream &o, vector<candidate> &candidates_running, vector<candidate> &candidates_loosers, vector<int> &running_ids) {
 	size_t mn = num_of_ballots;
 	size_t mx = 0;
@@ -94,9 +111,17 @@ bool check_running(ostream &o, vector<candidate> &candidates_running, vector<can
 	return false;
 }
 
-// evaluate from the second column onward
-// check if we found a winner at the beginning
-// only consider those in the losers pool
+/**
+ * eval redistributes the votes to the respective candidates, and calls upon check_running to see if the 
+ * redistribution resulted in a winner. Else, candidates_running creates another looser pool for which 
+ * eval() must handle once more, until a winner (or tie) is reached
+ */
+///
+/// Notes:
+/// evaluate from the second column onward
+/// check if we found a winner at the beginning
+/// only consider those in the losers pool
+///
 void eval(ostream &o, vector<candidate> &candidates_running, vector<candidate> &candidates_loosers, vector<int> &running_ids) {
 
 	// Testing purposes
@@ -144,6 +169,11 @@ void eval(ostream &o, vector<candidate> &candidates_running, vector<candidate> &
 // parse_input
 // ------------
 
+/**
+ * parse_input parses the istream (input,cin) and puts them all into a vector of candidates.
+ * Optimization comes into play by using a deque for ballots. Instead of iterating through the entire
+ * line of preferences, pop() the preferences until a valid one is reached
+ */
 void parse_input(istream &input, vector<candidate> &candidates_running) {
 
 
@@ -176,6 +206,11 @@ void parse_input(istream &input, vector<candidate> &candidates_running) {
 	}
 }
 
+/**
+ * The main function (aside from the main in RunVoting.c++).
+ * go() calls upon all of the above function to reach a winner.   
+ * go() also will do this x number of times (test cases)
+ */
 void go(istream &input, ostream &o) {
 
 	string num_tests;

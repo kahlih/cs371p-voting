@@ -18,6 +18,11 @@
 
 using namespace std;
 
+
+/**
+ With each candidate comes a name, an ID, and a set of ballots whose
+ size indicates the number of people who voted for him
+ */
 class candidate {
 
 	public:
