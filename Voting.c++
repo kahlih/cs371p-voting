@@ -214,7 +214,7 @@ void parse_input(istream &input, vector<candidate> &candidates_running) {
 void go(istream &input, ostream &o) {
 
 	string num_tests;
-	getline(input, num_tests); // 2
+	getline(input, num_tests);
 
 	string dummy;
 	getline(input, dummy);
