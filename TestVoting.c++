@@ -11,42 +11,6 @@
 using namespace std;
 
 
-
-/* ************ */
-/* pre_eval */
-/* ************ */
-
-TEST(Voting_Fixture_pre_eval, pre_eval_1){
-    vector<candidate> candidates_running;
-    vector<candidate> candidates_loosers;
-    vector<int> running_ids;
-
-}
-
-
-
-/* ************ */
-/* check_running */
-/* ************ */
-
-TEST(Voting_Fixture_check_running, check_running_1){
-    vector<candidate> candidates_running;
-    vector<candidate> candidates_loosers;
-    vector<int> running_ids;
-
-}
-
-/* ************ */
-/* eval */
-/* ************ */
-
-TEST(Voting_Fixture_eval, eval_1){
-    vector<candidate> candidates_running;
-    vector<candidate> candidates_loosers;
-    vector<int> running_ids;
-
-}
-
 /* ************ */
 /* parse_input */
 /* ************ */
@@ -146,4 +110,140 @@ TEST(Voting_Fixture_go, go_4) {
     ostringstream w;
     go(r,w);
     ASSERT_EQ("Obama\n" , w.str());
+}
+
+
+/* ************ */
+/* pre_eval */
+/* ************ */
+
+
+/* Tie */
+TEST(Voting_Fixture_pre_eval, pre_eval_1){
+    vector<candidate> candidates_running;
+    vector<candidate> candidates_loosers;
+    vector<int> running_ids;
+
+    deque<int> d1;
+    candidate c1("Han Solo",1);
+    c1.ballots.push_back(d1);
+    candidates_running.push_back(c1);
+    candidate c2("Darth Vader",2);
+    c2.ballots.push_back(d1);
+    candidates_running.push_back(c2);
+    candidate c3("Yoda",3);
+    c3.ballots.push_back(d1);
+    candidates_running.push_back(c3);
+
+    pre_eval(candidates_running,candidates_loosers,running_ids);
+
+    ASSERT_EQ(candidates_running.size(),3);
+    ASSERT_EQ(candidates_loosers.size(),0);
+}
+
+/* One Winner */
+TEST(Voting_Fixture_pre_eval, pre_eval_2){
+    vector<candidate> candidates_running;
+    vector<candidate> candidates_loosers;
+    vector<int> running_ids;
+
+    deque<int> d1;
+    candidate c1("Han Solo",1);
+    c1.ballots.push_back(d1);
+    c1.ballots.push_back(d1);
+    candidates_running.push_back(c1);
+    candidate c2("Darth Vader",2);
+    c2.ballots.push_back(d1);
+    candidates_running.push_back(c2);
+    candidate c3("Yoda",3);
+    c3.ballots.push_back(d1);
+    candidates_running.push_back(c3);
+
+    pre_eval(candidates_running,candidates_loosers,running_ids);
+
+    ASSERT_EQ(candidates_running.size(),1);
+    ASSERT_EQ(candidates_loosers.size(),2);
+}
+
+/* Two Candidates Tied for First */
+TEST(Voting_Fixture_pre_eval, pre_eval_3){
+    vector<candidate> candidates_running;
+    vector<candidate> candidates_loosers;
+    vector<int> running_ids;
+
+    deque<int> d1;
+    candidate c1("Han Solo",1);
+    c1.ballots.push_back(d1);
+    c1.ballots.push_back(d1);
+    candidates_running.push_back(c1);
+    candidate c2("Darth Vader",2);
+    c2.ballots.push_back(d1);
+    c2.ballots.push_back(d1);
+    candidates_running.push_back(c2);
+    candidate c3("Yoda",3);
+    c3.ballots.push_back(d1);
+    candidates_running.push_back(c3);
+
+    pre_eval(candidates_running,candidates_loosers,running_ids);
+
+    ASSERT_EQ(candidates_running.size(),2);
+    ASSERT_EQ(candidates_loosers.size(),1);
+}
+
+
+
+/* ************ */
+/* check_running */
+/* ************ */
+
+/* Overall Winner */
+TEST(Voting_Fixture_check_running, check_running_1){
+    ostringstream w;
+    vector<candidate> candidates_running;
+    vector<candidate> candidates_loosers;
+    vector<int> running_ids;
+
+    deque<int> d1;
+    candidate c("Han Solo",1);
+    c.ballots.push_back(d1);
+    c.ballots.push_back(d1);
+    candidates_running.push_back(c);
+
+    check_running(w,candidates_running,candidates_loosers,running_ids);
+    ASSERT_EQ(w.str(),"Han Solo\n");
+}
+
+
+/* Tie */
+TEST(Voting_Fixture_check_running, check_running_2){
+    ostringstream w;
+    vector<candidate> candidates_running;
+    vector<candidate> candidates_loosers;
+    vector<int> running_ids;
+
+    deque<int> d1;
+    candidate c1("Han Solo",1);
+    c1.ballots.push_back(d1);
+    candidates_running.push_back(c1);
+    candidate c2("Darth Vader",2);
+    c2.ballots.push_back(d1);
+    candidates_running.push_back(c2);
+    candidate c3("Yoda",3);
+    c3.ballots.push_back(d1);
+    candidates_running.push_back(c3);
+
+    check_running(w,candidates_running,candidates_loosers,running_ids);
+    ASSERT_EQ(w.str(),"Han Solo\nDarth Vader\nYoda\n");
+}
+
+/* ************ */
+/* eval */
+/* ************ */
+
+TEST(Voting_Fixture_eval, eval_1){
+    ostringstream w;
+    vector<candidate> candidates_running;
+    vector<candidate> candidates_loosers;
+    vector<int> running_ids;
+
 }

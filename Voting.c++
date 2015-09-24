@@ -23,6 +23,10 @@ int num_of_ballots;
 // analyze the first column
 inline void pre_eval(vector<candidate> &candidates_running, vector<candidate> &candidates_loosers, vector<int> &running_ids) {
 
+	//Testing purposes
+	if (num_of_ballots == 0){
+		num_of_ballots = 3;
+	}
 	size_t mn = num_of_ballots;
 	size_t mx = 0;
 	for (candidate c : candidates_running) {
@@ -47,6 +51,11 @@ inline void pre_eval(vector<candidate> &candidates_running, vector<candidate> &c
 bool check_running(ostream &o, vector<candidate> &candidates_running, vector<candidate> &candidates_loosers, vector<int> &running_ids) {
 	size_t mn = num_of_ballots;
 	size_t mx = 0;
+
+	// Testing Purposes
+	if (num_of_ballots==0){
+		num_of_ballots = 3;
+	}
 
 	// Check if there is a Winner > %50 votes
 	for (candidate c : candidates_running) {
