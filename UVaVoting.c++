@@ -72,23 +72,15 @@ vector<candidate> candidates_loosers;
 vector<int> running_ids;
 int num_of_ballots;
 
-bool debug = false;
-bool trace = false;
-bool debug_parse_input = false;
-bool debug_pre_eval = false;
-bool debug_go = false;
-bool debug_check_running = true;
-bool debug_eval = true;
-
-void print_state_running(){
+void print_state_running(vector<candidate> &candidates_running) {
 	cout << "candidates_running: " << endl;
-	for (candidate c : candidates_running){
+	for (candidate c : candidates_running) {
 		c.print_candidate();
 	}
 }
-void print_state_loosing(){
+void print_state_loosing(vector<candidate> &candidates_loosers) {
 	cout << "candidates_loosers: " << endl;
-	for (candidate c : candidates_loosers){
+	for (candidate c : candidates_loosers) {
 		c.print_candidate();
 	}
 }
