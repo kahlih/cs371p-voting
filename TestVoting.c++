@@ -240,10 +240,44 @@ TEST(Voting_Fixture_check_running, check_running_2){
 /* eval */
 /* ************ */
 
+/* Similar to check_running (Should be same) */
 TEST(Voting_Fixture_eval, eval_1){
     ostringstream w;
     vector<candidate> candidates_running;
     vector<candidate> candidates_loosers;
     vector<int> running_ids;
 
+    deque<int> d1;
+    candidate c("Han Solo",1);
+    c.ballots.push_back(d1);
+    c.ballots.push_back(d1);
+    candidates_running.push_back(c);
+
+    check_running(w,candidates_running,candidates_loosers,running_ids);
+    ASSERT_EQ(w.str(),"Han Solo\n");
+    ASSERT_EQ(candidates_running.size(),1);
+    ASSERT_EQ(candidates_loosers.size(),0);
+    ASSERT_EQ(running_ids.size(),0);
+}
+
+/* Similar to check_running (Should be same) */
+TEST(Voting_Fixture_eval, eval_2){
+    ostringstream w;
+    vector<candidate> candidates_running;
+    vector<candidate> candidates_loosers;
+    vector<int> running_ids;
+
+    deque<int> d1;
+    candidate c1("Han Solo",1);
+    c1.ballots.push_back(d1);
+    candidates_running.push_back(c1);
+    candidate c2("Darth Vader",2);
+    c2.ballots.push_back(d1);
+    candidates_running.push_back(c2);
+    candidate c3("Yoda",3);
+    c3.ballots.push_back(d1);
+    candidates_running.push_back(c3);
+
+    check_running(w,candidates_running,candidates_loosers,running_ids);
+    ASSERT_EQ(w.str(),"Han Solo\nDarth Vader\nYoda\n");
 }

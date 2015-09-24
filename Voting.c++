@@ -99,6 +99,10 @@ bool check_running(ostream &o, vector<candidate> &candidates_running, vector<can
 // only consider those in the losers pool
 void eval(ostream &o, vector<candidate> &candidates_running, vector<candidate> &candidates_loosers, vector<int> &running_ids) {
 
+	// Testing purposes
+	if (num_of_ballots==0){
+		num_of_ballots=5;
+	}
 	if (check_running(o,candidates_running,candidates_loosers,running_ids)) {
 		return;
 	}
